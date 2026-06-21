@@ -6,7 +6,9 @@
     "node": ">=20"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@jvd/ui"]
+    "onlyBuiltDependencies": [
+      "@jvd/ui"
+    ]
   },
   "scripts": {
     "dev": "next dev",
