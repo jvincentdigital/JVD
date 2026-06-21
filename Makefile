@@ -7,31 +7,31 @@ PROJECT_NAME := john-vincent-digital
 
 .PHONY: run
 run: ## Start dev server
-	npm run dev
+	pnpm run dev
 
 .PHONY: build
 build: ## Build for production
-	npm run build
+	pnpm run build
 
 .PHONY: analyze
 analyze: ## Build with bundle analyzer reports (writes .next/analyze/*.html)
-	ANALYZE=true npm run build
+	ANALYZE=true pnpm run build
 
 .PHONY: start
 start: ## Start production server locally
-	npm run start
+	pnpm run start
 
 .PHONY: lint
 lint: ## Run Next.js linter
-	npm run lint
+	pnpm run lint
 
 .PHONY: format
 format: ## Format with Prettier
-	npm run format
+	pnpm run format
 
 .PHONY: format-check
 format-check: ## Verify formatting with Prettier (read-only)
-	npm run format:check
+	pnpm run format:check
 
 .PHONY: typecheck
 typecheck: ## Run TypeScript type checking
@@ -41,11 +41,11 @@ typecheck: ## Run TypeScript type checking
 
 .PHONY: test
 test: ## Run unit tests
-	npm test
+	pnpm test
 
 .PHONY: test-e2e
 test-e2e: ## Run Playwright end-to-end tests against a built site
-	npm run build && npm run test:e2e
+	pnpm run build && pnpm run test:e2e
 
 # ─── Deployment ───────────────────────────────────────────────
 
@@ -69,7 +69,7 @@ status: ## Show git and Vercel project status
 
 .PHONY: deps
 deps: ## Install dependencies
-	npm install
+	pnpm install
 
 .PHONY: clean
 clean: ## Remove build artifacts
