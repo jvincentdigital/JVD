@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@jvd/ui':
-        specifier: git+https://github.com/jvincentdigital/jvd-ui.git#v0.1.5
-        version: git+https://github.com/jvincentdigital/jvd-ui.git#b8386928217534142ff16c5de39a9e2ce15b57b3(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(next-intl@3.26.5(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1))(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.19)
+        specifier: git+https://github.com/jvincentdigital/jvd-ui.git#v0.1.6
+        version: git+https://github.com/jvincentdigital/jvd-ui.git#3c4c32251287f82d30f20773910a542745ab64a8(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(next-intl@3.26.5(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1))(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.19)
       '@sentry/nextjs':
         specifier: ^10.49.0
         version: 10.50.0(@opentelemetry/core@2.7.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.7.0(@opentelemetry/api@1.9.1))(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.106.2(postcss@8.5.12))
@@ -363,9 +363,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@jvd/ui@git+https://github.com/jvincentdigital/jvd-ui.git#b8386928217534142ff16c5de39a9e2ce15b57b3':
-    resolution: {commit: b8386928217534142ff16c5de39a9e2ce15b57b3, repo: https://github.com/jvincentdigital/jvd-ui.git, type: git}
-    version: 0.1.5
+  '@jvd/ui@git+https://github.com/jvincentdigital/jvd-ui.git#3c4c32251287f82d30f20773910a542745ab64a8':
+    resolution: {commit: 3c4c32251287f82d30f20773910a542745ab64a8, repo: https://github.com/jvincentdigital/jvd-ui.git, type: git}
+    version: 0.1.6
     engines: {node: '>=20'}
     peerDependencies:
       next: ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -4851,7 +4851,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jvd/ui@git+https://github.com/jvincentdigital/jvd-ui.git#b8386928217534142ff16c5de39a9e2ce15b57b3(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(next-intl@3.26.5(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1))(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.19)':
+  '@jvd/ui@git+https://github.com/jvincentdigital/jvd-ui.git#3c4c32251287f82d30f20773910a542745ab64a8(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(next-intl@3.26.5(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1))(next@14.2.35(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.19)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.12(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-alert-dialog': 1.1.15(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
