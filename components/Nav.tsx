@@ -38,13 +38,12 @@ export default function Nav() {
 
   const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
   const otherLocale = locale === 'en' ? 'es' : 'en';
-  const otherPath =
-    pathname.replace(/^\/(en|es)/, `/${otherLocale}`) || `/${otherLocale}`;
+  const otherPath = pathname.replace(/^\/(en|es)/, `/${otherLocale}`) || `/${otherLocale}`;
   const hrefFor = (id: string) => (isHome ? `#${id}` : `/${locale}#${id}`);
 
   return (
     <UiNav
-      brand="John Vincent Digital"
+      brand='John Vincent Digital'
       brandHref={`/${locale}`}
       sections={sectionIds.map((id) => ({
         id,

@@ -5,11 +5,6 @@
   "engines": {
     "node": ">=20"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@jvd/ui"
-    ]
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

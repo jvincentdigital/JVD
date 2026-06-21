@@ -87,17 +87,17 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-dark px-4 py-20">
-      <div className="mx-auto max-w-2xl">
+    <section id='contact' className='bg-dark px-4 py-20'>
+      <div className='mx-auto max-w-2xl'>
         <ScrollReveal>
-          <h2 className="text-center font-serif text-3xl font-bold text-cream sm:text-4xl">
+          <h2 className='text-center font-serif text-3xl font-bold text-cream sm:text-4xl'>
             {t('heading')}
           </h2>
-          <p className="mt-4 text-center text-lg text-cream/70">{t('subheading')}</p>
+          <p className='mt-4 text-center text-lg text-cream/70'>{t('subheading')}</p>
         </ScrollReveal>
         <ScrollReveal>
           <ContactForm
-            tone="dark"
+            tone='dark'
             fields={fields}
             initialValues={preselected ? { service: preselected } : undefined}
             honeypotField={{ name: 'gotcha', label: 'Leave this field empty' }}
@@ -110,15 +110,15 @@ export default function Contact() {
             genericErrorMessage={t('form.generic_error')}
             footer={
               <a
-                href="https://wa.me/17877174203"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded underline transition-colors hover:text-cream focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-dark"
+                href='https://wa.me/17877174203'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='rounded underline transition-colors hover:text-cream focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-dark'
               >
                 {t('whatsapp')}
               </a>
             }
-            className="mt-12"
+            className='mt-12'
             onSubmit={handleSubmit}
           />
         </ScrollReveal>

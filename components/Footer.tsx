@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <UiFooter
-      tone="dark"
+      tone='dark'
       tagline={<span>{t('location')}</span>}
       socialLinks={[
         {
