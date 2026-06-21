@@ -1,7 +1,11 @@
 # @jvd/ui is a git dependency whose dist is built via its `prepare` script.
 # pnpm 10 reads the build-script allowlist from THIS file (not package.json's
 # "pnpm" field) and blocks git-dep build scripts unless allowlisted here —
-# required for clean installs (CI / Vercel) that can't reuse a prebuilt copy
-# from the local pnpm store.
+# required for clean installs (CI / Vercel) that can't reuse a prebuilt copy.
+#
+# NOTE: pnpm 10.34 matches git-hosted deps by their FULL spec (incl. commit),
+# not the bare name, so the pinned-sha entry below is what actually unblocks CI.
+# When bumping the @jvd/ui version pin, update the commit hash here too.
 onlyBuiltDependencies:
   - "@jvd/ui"
+  - "@jvd/ui@git+https://github.com/jvincentdigital/jvd-ui.git#85a5562c85ba868370cad6339e08f544a6ce104e"
