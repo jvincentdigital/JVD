@@ -5,14 +5,14 @@
 @layer base {
   :root {
     /* JVD palette mapped into the @jvd/ui shadcn token system */
-    --background: 36 38% 93%;        /* cream     #F5F0E8 */
-    --foreground: 0 0% 10%;          /* charcoal  #1A1A1A */
-    --muted: 36 25% 88%;             /* sand-cream */
-    --muted-foreground: 28 6% 39%;   /* warm-gray #6B6560 */
-    --border: 36 25% 84%;            /* border    #E0D9CF */
+    --background: 36 38% 93%; /* cream     #F5F0E8 */
+    --foreground: 0 0% 10%; /* charcoal  #1A1A1A */
+    --muted: 36 25% 88%; /* sand-cream */
+    --muted-foreground: 28 6% 39%; /* warm-gray #6B6560 */
+    --border: 36 25% 84%; /* border    #E0D9CF */
     --input: 36 25% 84%;
-    --ring: 155 100% 33%;            /* accent       #00A86B */
-    --primary: 158 100% 24%;         /* accent-dark  #007A4D — used for primary CTAs */
+    --ring: 155 100% 33%; /* accent       #00A86B */
+    --primary: 158 100% 24%; /* accent-dark  #007A4D — used for primary CTAs */
     --primary-foreground: 0 0% 100%;
     --secondary: 36 25% 88%;
     --secondary-foreground: 0 0% 10%;

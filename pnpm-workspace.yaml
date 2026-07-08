@@ -1,0 +1,6 @@
+# @jvd/ui is a git dependency whose dist is built via its `prepare` script (tsup).
+# pnpm 10 blocks git-dep build scripts unless allowlisted here — required for clean
+# installs (CI / Vercel) that can't reuse a prebuilt copy from the local store.
+# Lives here (not package.json's deprecated "pnpm" field, which shadows this file).
+onlyBuiltDependencies:
+  - '@jvd/ui'
