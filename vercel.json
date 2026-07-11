@@ -1,4 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "git config --global url.\"https://x-access-token:$GITHUB_TOKEN@github.com/\".insteadOf \"https://github.com/\" && git config --global url.\"https://x-access-token:$GITHUB_TOKEN@github.com/\".insteadOf \"git@github.com:\" && pnpm install"
+  "installCommand": "if [ -n \"$GITHUB_TOKEN\" ]; then git config --global url.\"https://x-access-token:$GITHUB_TOKEN@github.com/\".insteadOf \"https://github.com/\"; fi && pnpm install --no-frozen-lockfile --ignore-scripts"
 }
