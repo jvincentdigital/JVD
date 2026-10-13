@@ -51,7 +51,7 @@
   },
   "work": {
     "heading": "Trabajo reciente",
-    "subheading": "Cuatro proyectos activos en esports, moda de lujo, e-commerce y fragancias.",
+    "subheading": "Tres proyectos activos en esports, moda de lujo y operaciones de imprenta.",
     "projects": {
       "imperfect": {
         "name": "IMPerfect Gaming",
@@ -67,19 +67,12 @@
         "challengeLabel": "El reto",
         "challenge": "La clienta necesitaba convertir visitantes casuales en clientes de estilismo privado, mientras simultáneamente impulsaba ventas de afiliados a través de Saks, Neiman Marcus y Bergdorf Goodman. Reestructuramos el sitio alrededor de su marca personal primero, con el comercio de afiliados como capa secundaria — no al revés."
       },
-      "magenta": {
-        "name": "Magenta The Label",
-        "industry": "E-Commerce",
-        "description": "Marca de carteras artesanales en Shopify",
+      "xpress": {
+        "name": "Xpress Color",
+        "industry": "Imprenta y Rotulación",
+        "description": "Imprenta y taller de rótulos en Puerto Rico: sitio público y operaciones del equipo en una sola aplicación",
         "challengeLabel": "El reto",
-        "challenge": "Lanzar una tienda Shopify para una marca de productos artesanales donde cada artículo es único creó un problema de inventario particular — los flujos estándar de e-commerce asumen SKUs repetibles. Construimos una estructura de producto personalizada que comunicaba la escasez como una característica, no una limitación, lo que mejoró directamente la conversión."
-      },
-      "profumo": {
-        "name": "Profumo di Vita",
-        "industry": "Fragancias",
-        "description": "Tienda bilingüe de fragancias de lujo, 2 ubicaciones en PR",
-        "challengeLabel": "El reto",
-        "challenge": "Operar como una tienda completamente bilingüe EN/ES con dos ubicaciones físicas en Puerto Rico significaba que cada pieza de contenido — descripciones de productos, detalles de membresía, horarios, texto promocional — tenía que mantenerse en paralelo sin crear el doble de trabajo. Implementamos un sistema de gestión de traducciones que mantuvo ambos idiomas sincronizados con una sola actualización de contenido."
+        "challenge": "El taller quería cotizaciones, órdenes de trabajo y facturas en una sola herramienta, y la seguridad de que ningún trabajo empiece antes de recibir su depósito. Construimos una sola aplicación bilingüe: el sitio público, una herramienta para el equipo que lleva cada trabajo de cotización a orden de trabajo y a factura, y una regla que mantiene la producción bloqueada hasta que el depósito queda registrado."
       }
     }
   },
@@ -151,7 +144,7 @@
     "p3": "Cada sitio que construyo cumple con los estándares de accesibilidad WCAG 2.1 AA y se entrega completamente bilingüe en inglés y español de Puerto Rico — no traducido por máquina. No son extras. Son parte de cómo se hace el trabajo.",
     "p4": "Mis clientes van desde organizaciones de esports hasta estilistas de moda de lujo y minoristas de fragancias. Lo que tienen en común: necesitaban una presencia digital que rinda, y querían a alguien que realmente entienda su negocio.",
     "stat1": "7+ años construyendo productos digitales",
-    "stat2": "4 proyectos activos de clientes",
+    "stat2": "3 proyectos activos de clientes",
     "stat3": "Basado en Puerto Rico"
   },
   "contact": {

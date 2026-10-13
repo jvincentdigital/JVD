@@ -51,7 +51,7 @@
   },
   "work": {
     "heading": "Recent work",
-    "subheading": "Four live projects across esports, luxury fashion, e-commerce, and fragrance.",
+    "subheading": "Three live projects across esports, luxury fashion, and print shop operations.",
     "projects": {
       "imperfect": {
         "name": "IMPerfect Gaming",
@@ -67,19 +67,12 @@
         "challengeLabel": "The challenge",
         "challenge": "The client needed to convert casual site visitors into private styling clients, while simultaneously driving affiliate sales through Saks, Neiman Marcus, and Bergdorf Goodman. We restructured the site around her personal brand first, with affiliate commerce as a secondary layer — not the other way around."
       },
-      "magenta": {
-        "name": "Magenta The Label",
-        "industry": "E-Commerce",
-        "description": "Handcrafted handbag brand on Shopify",
+      "xpress": {
+        "name": "Xpress Color",
+        "industry": "Print & Signage",
+        "description": "Print and signage shop in Puerto Rico: public site and staff operations in one app",
         "challengeLabel": "The challenge",
-        "challenge": "Launching a Shopify store for a handcrafted product brand where every item is one-of-a-kind created a unique inventory problem — standard e-commerce flows assume repeatable SKUs. We built a custom product structure that communicated scarcity as a feature, not a limitation, which directly improved conversion."
-      },
-      "profumo": {
-        "name": "Profumo di Vita",
-        "industry": "Fragrance Retail",
-        "description": "Bilingual luxury fragrance store, 2 PR locations",
-        "challengeLabel": "The challenge",
-        "challenge": "Operating as a fully bilingual EN/ES store with two physical Puerto Rico locations meant every piece of content — product descriptions, membership tier details, store hours, promotional copy — had to be maintained in parallel without creating double the workload. We implemented a translation management system that kept both languages in sync with a single content update."
+        "challenge": "The shop wanted quotes, work orders and invoices in one tool, and a way to be sure no job starts before its deposit comes in. We built one bilingual app: the public site, a staff tool that carries a job from quote to work order to invoice, and a rule that keeps production locked until the deposit is recorded."
       }
     }
   },
@@ -149,9 +142,9 @@
     "p1": "I'm John Vincent, a web designer and digital strategist based in Puerto Rico. I started building websites for local businesses and organizations because I saw a gap — great businesses with weak digital presence, and agencies charging way too much to fix it.",
     "p2": "I use AI-assisted workflows to move faster and smarter than a traditional agency, without cutting corners on quality. Every project I take on gets my full attention — not a junior designer or an outsourced team.",
     "p3": "Every site I build meets WCAG 2.1 AA accessibility standards and ships fully bilingual in English and Puerto Rico Spanish — not machine-translated. These aren't add-ons. They're how the work gets done.",
-    "p4": "My clients range from esports organizations to luxury fashion stylists to fragrance retailers. What they have in common: they needed a digital presence that performs, and they wanted someone who actually gets their business.",
+    "p4": "My clients range from esports organizations to luxury fashion stylists to print and signage shops. What they have in common: they needed a digital presence that performs, and they wanted someone who actually gets their business.",
     "stat1": "7+ years building digital products",
-    "stat2": "4 live client projects",
+    "stat2": "3 live client projects",
     "stat3": "Based in Puerto Rico"
   },
   "contact": {

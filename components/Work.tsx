@@ -5,8 +5,7 @@ import ScrollReveal from './ScrollReveal';
 const projects = [
   { key: 'imperfect', slug: 'imperfect-gaming', color: '#C8E400' },
   { key: 'emmalina', slug: 'emmalina', color: '#C9A96E' },
-  { key: 'magenta', slug: 'magenta-the-label', color: '#C4587A' },
-  { key: 'profumo', slug: 'profumo-di-vita', color: '#8B6F47' },
+  { key: 'xpress', slug: 'xpress-color', color: '#FFD400' },
 ];
 
 export default function Work() {
@@ -27,8 +26,12 @@ export default function Work() {
         </ScrollReveal>
 
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
-          {projects.map((project) => (
-            <ScrollReveal key={project.key}>
+          {projects.map((project, i) => (
+            // With an odd number of projects the last card takes the full row.
+            <ScrollReveal
+              key={project.key}
+              className={i === projects.length - 1 && projects.length % 2 === 1 ? 'sm:col-span-2' : undefined}
+            >
               <div className='overflow-hidden rounded-xl border border-border bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent'>
                 <div className='h-1.5' style={{ backgroundColor: project.color }} />
                 <div className='p-8'>
