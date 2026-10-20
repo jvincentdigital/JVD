@@ -26,14 +26,16 @@ export default function PricingTierCard({
       }`}
     >
       {featured && featuredLabel && (
-        <span className='absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-accent px-3 py-1 text-xs font-medium uppercase tracking-wider text-white'>
+        <span className='absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-accent-dark px-3 py-1 text-xs font-medium uppercase tracking-wider text-white'>
           {featuredLabel}
         </span>
       )}
 
       <h3 className='font-serif text-xl font-bold text-charcoal'>{name}</h3>
       {price && (
-        <p className='mt-3 font-serif text-3xl font-bold text-charcoal sm:text-4xl'>{price}</p>
+        <p className='mt-3 font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
+          {price}
+        </p>
       )}
       <p className='mt-3 leading-relaxed text-warm-gray'>{tagline}</p>
 
@@ -55,10 +57,7 @@ export default function PricingTierCard({
         ))}
       </ul>
 
-      <a
-        href={ctaHref}
-        className='mt-8 inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 font-medium text-white transition-colors hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
-      >
+      <a href={ctaHref} className='btn-primary mt-8 w-full'>
         {ctaLabel}
       </a>
     </div>

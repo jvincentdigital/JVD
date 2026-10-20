@@ -5,10 +5,10 @@ export default function About() {
   const t = useTranslations('about');
 
   return (
-    <section id='about' className='bg-cream px-4 py-20'>
+    <section id='about' className='bg-cream px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-3xl'>
         <ScrollReveal>
-          <h2 className='mb-10 text-center font-serif text-3xl font-bold text-charcoal sm:text-4xl'>
+          <h2 className='mb-10 text-center font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
             {t('heading')}
           </h2>
         </ScrollReveal>

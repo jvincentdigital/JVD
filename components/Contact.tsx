@@ -87,10 +87,10 @@ export default function Contact() {
   }
 
   return (
-    <section id='contact' className='bg-dark px-4 py-20'>
+    <section id='contact' className='bg-dark px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-2xl'>
         <ScrollReveal>
-          <h2 className='text-center font-serif text-3xl font-bold text-cream sm:text-4xl'>
+          <h2 className='text-center font-serif text-3xl font-bold text-cream sm:text-4xl lg:text-[2.75rem]'>
             {t('heading')}
           </h2>
           <p className='mt-4 text-center text-lg text-cream/70'>{t('subheading')}</p>

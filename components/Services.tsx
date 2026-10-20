@@ -71,11 +71,11 @@ export default function Services() {
   }));
 
   return (
-    <section id='services' className='bg-cream px-4 py-20'>
+    <section id='services' className='bg-cream px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-5xl'>
         <ScrollReveal>
-          <div className='mb-14 text-center'>
-            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl'>
+          <div className='mb-16 text-center'>
+            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
               {t('heading')}
             </h2>
             <p className='mx-auto mt-4 max-w-2xl text-lg text-warm-gray'>{t('subheading')}</p>
@@ -85,13 +85,13 @@ export default function Services() {
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
           {cards.map((card, i) => (
             <ScrollReveal key={i}>
-              <div className='h-full rounded-xl border border-border bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent'>
+              <div className='card-lift h-full rounded-xl border border-border bg-white p-8'>
                 <div className='mb-4'>{card.icon}</div>
                 <h3 className='font-serif text-xl font-bold text-charcoal'>{card.title}</h3>
                 <p className='mt-3 leading-relaxed text-warm-gray'>{card.description}</p>
                 <a
                   href='#pricing'
-                  className='mt-4 inline-block rounded font-medium text-accent transition-colors hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent'
+                  className='mt-4 inline-flex min-h-11 items-center rounded font-semibold text-accent-dark transition-colors hover:text-charcoal focus:outline-none focus:ring-2 focus:ring-accent'
                 >
                   {card.link}
                 </a>
