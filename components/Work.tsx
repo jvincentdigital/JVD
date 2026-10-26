@@ -15,11 +15,11 @@ export default function Work() {
   const locale = useLocale();
 
   return (
-    <section id='work' className='bg-cream px-4 py-20'>
+    <section id='work' className='bg-cream px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-5xl'>
         <ScrollReveal>
-          <div className='mb-14 text-center'>
-            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl'>
+          <div className='mb-16 text-center'>
+            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
               {t('heading')}
             </h2>
             <p className='mx-auto mt-4 max-w-2xl text-lg text-warm-gray'>{t('subheading')}</p>
@@ -29,7 +29,7 @@ export default function Work() {
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
           {projects.map((project) => (
             <ScrollReveal key={project.key}>
-              <div className='overflow-hidden rounded-xl border border-border bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent'>
+              <div className='card-lift overflow-hidden rounded-xl border border-border bg-white'>
                 <div className='h-1.5' style={{ backgroundColor: project.color }} />
                 <div className='p-8'>
                   <span className='mb-3 inline-block rounded-full border border-border px-2.5 py-1 text-xs font-medium text-warm-gray'>
@@ -40,7 +40,7 @@ export default function Work() {
                   </h3>
                   <p className='mt-2 text-warm-gray'>{t(`projects.${project.key}.description`)}</p>
                   <div className='mt-4 border-t border-border pt-4'>
-                    <p className='mb-1.5 text-xs font-medium uppercase tracking-wide text-accent/70'>
+                    <p className='mb-1.5 text-xs font-medium uppercase tracking-[0.08em] text-accent-dark'>
                       {t(`projects.${project.key}.challengeLabel`)}
                     </p>
                     <p className='text-sm leading-relaxed text-warm-gray'>
@@ -49,7 +49,7 @@ export default function Work() {
                   </div>
                   <Link
                     href={`/${locale}/work/${project.slug}`}
-                    className='mt-4 inline-block rounded font-medium text-accent transition-colors hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+                    className='mt-4 inline-flex min-h-11 items-center rounded font-semibold text-accent-dark transition-colors hover:text-charcoal focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
                   >
                     {tCase('readCaseStudy')}
                   </Link>

@@ -10,14 +10,14 @@ export default function AccessibilitySection() {
   const ctaHref = `/${locale}?service=accessibility#contact`;
 
   return (
-    <section id='accessibility' className='border-t border-border bg-white px-4 py-20'>
+    <section id='accessibility' className='border-t border-border bg-white px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-6xl'>
         <ScrollReveal>
           <div className='mb-10 text-center'>
-            <p className='mb-4 text-xs font-medium uppercase tracking-widest text-accent'>
+            <p className='mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-accent-dark'>
               {t('label')}
             </p>
-            <h2 className='mx-auto max-w-3xl font-serif text-3xl font-bold text-charcoal sm:text-4xl'>
+            <h2 className='mx-auto max-w-3xl font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
               {t('heading')}
             </h2>
             <p className='mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-warm-gray'>
@@ -54,10 +54,7 @@ export default function AccessibilitySection() {
               {t('bottomCtaHeading')}
             </p>
             <p className='mt-2 text-warm-gray'>{t('bottomCtaSubheading')}</p>
-            <a
-              href={ctaHref}
-              className='mt-6 inline-block rounded-lg bg-accent px-8 py-3 font-medium text-white transition-colors hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
-            >
+            <a href={ctaHref} className='btn-primary mt-6'>
               {t('bottomCtaButton')}
             </a>
           </div>

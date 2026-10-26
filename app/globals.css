@@ -31,3 +31,82 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Lenis (lab): it drives the scroll, so the browser must not smooth it twice. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
+  }
+  h2.font-serif {
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h3.font-serif {
+    letter-spacing: -0.01em;
+  }
+}
+
+/*
+ * Motion gate. A tiny inline script adds .motion-ok to <html> before paint
+ * unless the visitor prefers reduced motion. Only then are hero pieces held
+ * back for their entrance; a CSS failsafe shows them after 2.5s if JS never
+ * arrives, so nothing can stay hidden.
+ */
+@keyframes motion-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+html.motion-ok [data-motion='pending'] {
+  visibility: hidden;
+  animation: motion-failsafe 0s 2.5s forwards;
+}
+.split-word {
+  will-change: transform;
+}
+/* room for descenders (y, g, p) while the mask clips the rising words */
+.split-word-mask {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-accent-dark px-7 text-base font-semibold text-white shadow-[0_1px_2px_rgba(17,17,17,0.08),0_4px_12px_-4px_rgba(0,122,77,0.35)] transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-px hover:shadow-[0_2px_4px_rgba(17,17,17,0.08),0_10px_24px_-8px_rgba(0,122,77,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:translate-y-0 active:scale-[0.98];
+  }
+  .btn-arrow {
+    @apply inline-block transition-transform duration-200 ease-out group-hover:translate-x-1;
+  }
+  .link-quiet {
+    @apply inline-flex min-h-11 items-center rounded px-1 font-medium text-charcoal underline decoration-charcoal/30 decoration-1 underline-offset-[6px] transition-colors duration-200 hover:decoration-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+  }
+  .card-lift {
+    @apply transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-[0_1px_2px_rgba(17,17,17,0.04),0_12px_32px_-12px_rgba(17,17,17,0.18)];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-arrow,
+  .card-lift {
+    transition: none;
+    transform: none !important;
+  }
+}
