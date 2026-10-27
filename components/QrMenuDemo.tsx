@@ -43,7 +43,12 @@ export default function QrMenuDemo() {
   const menuPath = `/${locale}/demo/menu`;
 
   // The code points at this same site, so it works on localhost, previews and production.
-  useEffect(() => setLink(`${window.location.origin}${menuPath}`), [menuPath]);
+  // A Vercel share key in the address after # (#share=KEY) goes into the code too, so a
+  // phone can open a login-protected preview. The key never reaches the server or git.
+  useEffect(() => {
+    const share = new URLSearchParams(window.location.hash.slice(1)).get('share');
+    setLink(`${window.location.origin}${menuPath}${share ? `?_vercel_share=${encodeURIComponent(share)}` : ''}`);
+  }, [menuPath]);
 
   const download = () => {
     if (!api) return;
