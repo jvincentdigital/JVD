@@ -100,6 +100,11 @@ The `docs/` folder is the single source of truth for institutional knowledge.
 - `/todo` — Work through TODO.md tasks sequentially (`/todo populate` to re-analyze the codebase and seed the next batch of tasks)
 - `/squad` — Analyze the project and generate domain-specific rules and specialist subagents (`/squad refresh` to update)
 
+**Staged skills** (lab; in `docs/skills/`, copy into `.claude/skills/` to enable):
+
+- `design-polish` — Audit / polish / redesign pass with floor, reflex and finish tiers. Backed by `make design-lint` (`scripts/design/lint.mjs`).
+- `diagram` — JSON spec to an offline HTML/SVG diagram in JVD colours. `make diagrams` renders `docs/diagrams/*.json`; `make design-test` self-tests both tools.
+
 ## External Services
 
 - **Vercel** — Hosting and deployment. Auto-deploys from GitHub on push to `main`. Project: `john-vincent-digital`.

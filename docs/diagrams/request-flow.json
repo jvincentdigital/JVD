@@ -1,0 +1,24 @@
+{
+  "title": "How a page request flows",
+  "subtitle": "From the browser to hydrated HTML, as described in docs/architecture.md",
+  "nodes": [
+    { "id": "browser", "label": "Browser request", "sub": "GET /" },
+    { "id": "edge", "label": "Vercel Edge Network" },
+    { "id": "middleware", "label": "Locale routing", "sub": "middleware.ts", "focus": true },
+    { "id": "layout", "label": "Locale layout", "sub": "app/[locale]/layout.tsx" },
+    { "id": "page", "label": "Page composition", "sub": "app/[locale]/page.tsx", "focus": true },
+    { "id": "server", "label": "Server sections", "sub": "Hero, Services, Work ..." },
+    { "id": "client", "label": "Client components", "sub": "Nav, Contact, ScrollReveal" },
+    { "id": "html", "label": "Static HTML + hydration" }
+  ],
+  "edges": [
+    { "from": "browser", "to": "edge" },
+    { "from": "edge", "to": "middleware" },
+    { "from": "middleware", "to": "layout", "label": "/ -> /en" },
+    { "from": "layout", "to": "page", "label": "fonts + messages" },
+    { "from": "page", "to": "server" },
+    { "from": "page", "to": "client" },
+    { "from": "server", "to": "html" },
+    { "from": "client", "to": "html" }
+  ]
+}

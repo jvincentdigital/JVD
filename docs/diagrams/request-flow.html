@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a page request flows</title>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F5F0E8}svg{max-width:100%;height:auto}</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 936" width="640" height="936" role="img" aria-labelledby="t d">
+<title id="t">How a page request flows</title>
+<desc id="d">Browser request to Vercel Edge Network; Vercel Edge Network to Locale routing; Locale routing to Locale layout (/ -&gt; /en); Locale layout to Page composition (fonts + messages); Page composition to Server sections; Page composition to Client components; Server sections to Static HTML + hydration; Client components to Static HTML + hydration</desc>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#6B6560"/></marker></defs>
+<rect width="640" height="936" fill="#F5F0E8"/>
+<text x="48" y="56" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="28" fill="#1A1A1A">How a page request flows</text>
+<text x="48" y="84" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" fill="#6B6560">From the browser to hydrated HTML, as described in docs/architecture.md</text>
+<path d="M320 168 V232" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M320 288 V352" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M320 408 V472" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<text x="328" y="460" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="11" fill="#6B6560">/ -&gt; /en</text>
+<path d="M320 528 V592" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<text x="328" y="580" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="11" fill="#6B6560">fonts + messages</text>
+<path d="M320 648 V680 H192 V712" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M320 648 V680 H440 V712" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M192 768 V800 H320 V832" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M440 768 V800 H320 V832" fill="none" stroke="#6B6560" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="244" y="112" width="152" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="320" y="136" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Browser request</text>
+<text x="320" y="156" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">GET /</text>
+<rect x="228" y="232" width="184" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="320" y="264" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Vercel Edge Network</text>
+<rect x="248" y="352" width="144" height="56" rx="8" fill="#FFFFFF" stroke="#007A4D" stroke-width="1"/>
+<text x="320" y="376" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#007A4D">Locale routing</text>
+<text x="320" y="396" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">middleware.ts</text>
+<rect x="220" y="472" width="200" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="320" y="496" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Locale layout</text>
+<text x="320" y="516" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">app/[locale]/layout.tsx</text>
+<rect x="228" y="592" width="184" height="56" rx="8" fill="#FFFFFF" stroke="#007A4D" stroke-width="1"/>
+<text x="320" y="616" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#007A4D">Page composition</text>
+<text x="320" y="636" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">app/[locale]/page.tsx</text>
+<rect x="88" y="712" width="208" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="192" y="736" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Server sections</text>
+<text x="192" y="756" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">Hero, Services, Work ...</text>
+<rect x="328" y="712" width="224" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="440" y="736" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Client components</text>
+<text x="440" y="756" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#6B6560">Nav, Contact, ScrollReveal</text>
+<rect x="212" y="832" width="216" height="56" rx="8" fill="#FFFFFF" stroke="#6B6560" stroke-width="1"/>
+<text x="320" y="864" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Static HTML + hydration</text>
+</svg>
+</body>
+</html>

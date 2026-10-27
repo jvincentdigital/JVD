@@ -48,6 +48,18 @@ typecheck: ## Run TypeScript type checking
 test: ## Run unit tests
 	pnpm test
 
+.PHONY: design-lint
+design-lint: ## Check components for contrast, focus and "AI look" habits (lab)
+	node scripts/design/lint.mjs
+
+.PHONY: diagrams
+diagrams: ## Render docs/diagrams/*.json to offline HTML diagrams (lab)
+	node scripts/design/diagram.mjs
+
+.PHONY: design-test
+design-test: ## Self-test the design lint and diagram tools (lab)
+	node scripts/design/selftest.mjs
+
 .PHONY: test-e2e
 test-e2e: ## Run Playwright end-to-end tests against a built site
 	pnpm run build && pnpm run test:e2e
