@@ -219,7 +219,8 @@
       }
     },
     "cta": "Every local business gets a custom plan — not a template.",
-    "ctaButton": "Get your free plan \u2192"
+    "ctaButton": "Get your free plan \u2192",
+    "demoLink": "See the live 3D QR menu demo →"
   },
   "footer": {
     "location": "John Vincent Digital · Puerto Rico",
@@ -285,5 +286,104 @@
     "ctaSimilar": "Start a similar project →",
     "otherWork": "Other work",
     "readCaseStudy": "Read case study →"
+  },
+  "demo": {
+    "qrMenu": {
+      "metaTitle": "3D QR Menu Demo | John Vincent Digital",
+      "metaDescription": "Tap the dish and it bursts into a working QR code for a sample menu. A live demo of our QR table menus for restaurants and bars in Puerto Rico.",
+      "label": "LIVE DEMO · QR TABLE MENUS",
+      "heading": "A QR menu your guests will want to scan",
+      "subheading": "Tap the dish. It bursts into a real QR code for a sample menu. Point your phone camera at it to try.",
+      "objectLabel": "Dish",
+      "cafe": "Café con leche",
+      "mofongo": "Mofongo",
+      "styleLabel": "Look",
+      "realistic": "Realistic",
+      "watercolor": "Watercolor",
+      "canvasLabel": "3D dish. Press Enter to turn it into a QR code.",
+      "tapHint": "Tap the dish to make the QR code",
+      "tapBack": "Tap again to bring the dish back",
+      "loading": "Plating your dish…",
+      "error": "This demo needs WebGL, which your browser has turned off. The sample menu still works:",
+      "openMenu": "Open the sample menu",
+      "download": "Download PNG",
+      "scanTip": "Scan from the screen with your phone camera. It opens a sample menu, not a real restaurant.",
+      "printTip": "For table cards we print the flat code and always test-scan the real print.",
+      "ctaHeading": "Want this for your restaurant, bar or café?",
+      "ctaButton": "Get your free plan →",
+      "back": "← Back to the site"
+    },
+    "menu": {
+      "metaTitle": "Sample Menu | La Fonda de Muestra",
+      "metaDescription": "A sample QR table menu made by John Vincent Digital. The restaurant is not real.",
+      "banner": "Sample menu. This restaurant is not real: it shows how a QR table menu by John Vincent Digital works.",
+      "name": "La Fonda de Muestra",
+      "tagline": "Puerto Rican kitchen · Sample menu",
+      "sections": {
+        "coffee": {
+          "title": "Coffee",
+          "items": {
+            "conLeche": {
+              "name": "Café con leche",
+              "description": "Local espresso with steamed milk.",
+              "price": "$2.75"
+            },
+            "cortadito": {
+              "name": "Cortadito",
+              "description": "Espresso cut with a little sweet milk.",
+              "price": "$2.25"
+            },
+            "colao": {
+              "name": "Café colao",
+              "description": "Strong, sweet, brewed the old way.",
+              "price": "$1.75"
+            }
+          }
+        },
+        "mains": {
+          "title": "Mains",
+          "items": {
+            "mofongo": {
+              "name": "Mofongo relleno de camarones",
+              "description": "Garlic mashed fried plantain with shrimp in criolla sauce.",
+              "price": "$18.00"
+            },
+            "pernil": {
+              "name": "Arroz con gandules y pernil",
+              "description": "Rice with pigeon peas and slow-roasted pork shoulder.",
+              "price": "$14.00"
+            },
+            "tostones": {
+              "name": "Tostones con mojo",
+              "description": "Twice-fried green plantain with garlic mojo.",
+              "price": "$6.00"
+            },
+            "alcapurrias": {
+              "name": "Alcapurrias (2)",
+              "description": "Fritters of green banana and yautía filled with seasoned beef.",
+              "price": "$5.00"
+            }
+          }
+        },
+        "desserts": {
+          "title": "Desserts",
+          "items": {
+            "flan": {
+              "name": "Flan de queso",
+              "description": "Cream cheese custard with caramel.",
+              "price": "$5.00"
+            },
+            "tembleque": {
+              "name": "Tembleque",
+              "description": "Coconut pudding with cinnamon.",
+              "price": "$4.50"
+            }
+          }
+        }
+      },
+      "note": "Prices are examples. Ask your server about allergies.",
+      "ctaHeading": "Want a menu like this for your place?",
+      "ctaButton": "Talk to John Vincent Digital →"
+    }
   }
 }

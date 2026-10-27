@@ -9,3 +9,6 @@ next-env.d.ts
 
 # generated lockfile
 pnpm-lock.yaml
+
+# copied from jvd-outputs/burst-qr, keep identical to the canonical copy
+lib/burst-qr/

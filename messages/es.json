@@ -225,7 +225,8 @@
       }
     },
     "cta": "Cada negocio local recibe un plan personalizado — no una plantilla.",
-    "ctaButton": "Agenda una llamada gratis →"
+    "ctaButton": "Agenda una llamada gratis →",
+    "demoLink": "Ver la demo del menú QR en 3D →"
   },
   "footer": {
     "location": "John Vincent Digital · Puerto Rico",
@@ -291,5 +292,104 @@
     "ctaSimilar": "Empieza un proyecto similar →",
     "otherWork": "Otros proyectos",
     "readCaseStudy": "Leer caso de estudio →"
+  },
+  "demo": {
+    "qrMenu": {
+      "metaTitle": "Demo de menú QR en 3D | John Vincent Digital",
+      "metaDescription": "Toca el plato y se convierte en un código QR que funciona, con un menú de muestra. Una demo en vivo de nuestros menús QR para restaurantes y bares en Puerto Rico.",
+      "label": "DEMO EN VIVO · MENÚS QR",
+      "heading": "Un menú QR que tus clientes van a querer escanear",
+      "subheading": "Toca el plato. Se convierte en un código QR real con un menú de muestra. Apunta la cámara de tu celular para probarlo.",
+      "objectLabel": "Plato",
+      "cafe": "Café con leche",
+      "mofongo": "Mofongo",
+      "styleLabel": "Estilo",
+      "realistic": "Realista",
+      "watercolor": "Acuarela",
+      "canvasLabel": "Plato en 3D. Presiona Enter para convertirlo en un código QR.",
+      "tapHint": "Toca el plato para crear el código QR",
+      "tapBack": "Toca otra vez para volver al plato",
+      "loading": "Sirviendo tu plato…",
+      "error": "Esta demo necesita WebGL y tu navegador lo tiene apagado. El menú de muestra sí funciona:",
+      "openMenu": "Abrir el menú de muestra",
+      "download": "Descargar PNG",
+      "scanTip": "Escanéalo desde la pantalla con la cámara de tu celular. Abre un menú de muestra, no un restaurante real.",
+      "printTip": "Para las mesas imprimimos el código plano y siempre probamos el impreso antes de entregarlo.",
+      "ctaHeading": "¿Quieres esto para tu restaurante, bar o cafetería?",
+      "ctaButton": "Agenda una llamada gratis →",
+      "back": "← Volver al sitio"
+    },
+    "menu": {
+      "metaTitle": "Menú de muestra | La Fonda de Muestra",
+      "metaDescription": "Un menú QR de muestra hecho por John Vincent Digital. El restaurante no es real.",
+      "banner": "Menú de muestra. Este restaurante no es real: enseña cómo funciona un menú QR de John Vincent Digital.",
+      "name": "La Fonda de Muestra",
+      "tagline": "Cocina puertorriqueña · Menú de muestra",
+      "sections": {
+        "coffee": {
+          "title": "Café",
+          "items": {
+            "conLeche": {
+              "name": "Café con leche",
+              "description": "Expreso local con leche espumada.",
+              "price": "$2.75"
+            },
+            "cortadito": {
+              "name": "Cortadito",
+              "description": "Expreso cortado con un poco de leche dulce.",
+              "price": "$2.25"
+            },
+            "colao": {
+              "name": "Café colao",
+              "description": "Fuerte y dulce, colado como antes.",
+              "price": "$1.75"
+            }
+          }
+        },
+        "mains": {
+          "title": "Platos",
+          "items": {
+            "mofongo": {
+              "name": "Mofongo relleno de camarones",
+              "description": "Plátano frito majado con ajo, relleno de camarones en salsa criolla.",
+              "price": "$18.00"
+            },
+            "pernil": {
+              "name": "Arroz con gandules y pernil",
+              "description": "Arroz con gandules y pernil asado lento.",
+              "price": "$14.00"
+            },
+            "tostones": {
+              "name": "Tostones con mojo",
+              "description": "Plátano verde frito dos veces, con mojo de ajo.",
+              "price": "$6.00"
+            },
+            "alcapurrias": {
+              "name": "Alcapurrias (2)",
+              "description": "Frituras de guineo verde y yautía rellenas de carne.",
+              "price": "$5.00"
+            }
+          }
+        },
+        "desserts": {
+          "title": "Postres",
+          "items": {
+            "flan": {
+              "name": "Flan de queso",
+              "description": "Flan de queso crema con caramelo.",
+              "price": "$5.00"
+            },
+            "tembleque": {
+              "name": "Tembleque",
+              "description": "Dulce de coco con canela.",
+              "price": "$4.50"
+            }
+          }
+        }
+      },
+      "note": "Los precios son de ejemplo. Pregúntale a tu mesero sobre alergias.",
+      "ctaHeading": "¿Quieres un menú así para tu negocio?",
+      "ctaButton": "Habla con John Vincent Digital →"
+    }
   }
 }

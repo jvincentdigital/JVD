@@ -1,10 +1,12 @@
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import ScrollReveal from './ScrollReveal';
 
 const venueKeys = ['bar', 'barbershop', 'beauty', 'foodtruck', 'boutique'] as const;
 
 export default function LocalBusiness() {
   const t = useTranslations('local');
+  const locale = useLocale();
 
   return (
     <section id='local' className='bg-white px-4 py-24 sm:py-32'>
@@ -34,6 +36,14 @@ export default function LocalBusiness() {
                 <p className='mt-2 leading-relaxed text-warm-gray'>
                   {t(`venues.${key}.description`)}
                 </p>
+                {key === 'bar' && (
+                  <Link
+                    href={`/${locale}/demo/qr-menu`}
+                    className='mt-4 inline-block font-semibold text-accent-dark underline-offset-4 hover:underline'
+                  >
+                    {t('demoLink')}
+                  </Link>
+                )}
               </div>
             </ScrollReveal>
           ))}
