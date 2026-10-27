@@ -47,7 +47,9 @@ export default function QrMenuDemo() {
   // phone can open a login-protected preview. The key never reaches the server or git.
   useEffect(() => {
     const share = new URLSearchParams(window.location.hash.slice(1)).get('share');
-    setLink(`${window.location.origin}${menuPath}${share ? `?_vercel_share=${encodeURIComponent(share)}` : ''}`);
+    setLink(
+      `${window.location.origin}${menuPath}${share ? `?_vercel_share=${encodeURIComponent(share)}` : ''}`,
+    );
   }, [menuPath]);
 
   const download = () => {
