@@ -359,6 +359,30 @@
         "pc": {
           "name": "Teclado y mouse",
           "for": "gaming en PC, centros LAN y streamers."
+        },
+        "bakery": {
+          "name": "Bizcocho",
+          "for": "panaderías y reposterías: el bizcocho abre tu menú o tus pedidos."
+        },
+        "barber": {
+          "name": "Poste de barbería",
+          "for": "barberías: el poste abre tus citas o tu Instagram."
+        },
+        "salon": {
+          "name": "Pintura y lápiz labial",
+          "for": "salones de uñas y belleza: abre tu página de citas."
+        },
+        "gym": {
+          "name": "Mancuerna y pesa rusa",
+          "for": "gimnasios y entrenadores: abre tu horario de clases o la inscripción."
+        },
+        "autoShop": {
+          "name": "Goma y llave",
+          "for": "talleres y gomeras: abre un formulario de cotización o tus reseñas."
+        },
+        "home": {
+          "name": "Casa y llave",
+          "for": "corredores y alquileres: abre la propiedad o tu contacto."
         }
       },
       "goodFor": "Ideal para",
@@ -393,6 +417,10 @@
         "flowers": "Flores y regalos",
         "fashion": "Ropa y mercancía",
         "media": "Música y medios",
+        "beauty": "Belleza y barbería",
+        "fitness": "Fitness",
+        "auto": "Autos",
+        "realestate": "Bienes raíces",
         "gaming": "Gaming",
         "social": "Redes sociales"
       },

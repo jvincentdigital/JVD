@@ -353,6 +353,30 @@
         "pc": {
           "name": "Keyboard and mouse",
           "for": "PC gaming, LAN centers and streamers."
+        },
+        "bakery": {
+          "name": "Layer cake",
+          "for": "bakeries and dessert shops: the cake opens your menu or orders."
+        },
+        "barber": {
+          "name": "Barber pole",
+          "for": "barbershops: the pole opens your booking or Instagram."
+        },
+        "salon": {
+          "name": "Polish and lipstick",
+          "for": "nail and beauty salons: opens your booking page."
+        },
+        "gym": {
+          "name": "Dumbbell and kettlebell",
+          "for": "gyms and trainers: opens your class schedule or sign-up."
+        },
+        "autoShop": {
+          "name": "Tire and wrench",
+          "for": "auto shops and tire centers: opens a quote form or your reviews."
+        },
+        "home": {
+          "name": "House and key",
+          "for": "realtors and rentals: opens the listing or your contact."
         }
       },
       "goodFor": "Good for",
@@ -387,6 +411,10 @@
         "flowers": "Flowers & gifts",
         "fashion": "Fashion & merch",
         "media": "Music & media",
+        "beauty": "Beauty & grooming",
+        "fitness": "Fitness",
+        "auto": "Auto",
+        "realestate": "Real estate",
         "gaming": "Gaming",
         "social": "Social media"
       },

@@ -22,6 +22,20 @@ import {
 } from '@/lib/burst-qr/objects/gear.js';
 import { controller, controllerPalette } from '@/lib/burst-qr/objects/controller.js';
 import { rad, radPalette } from '@/lib/burst-qr/objects/rad.js';
+import {
+  barber,
+  barberPalette,
+  autoShop,
+  autoPalette,
+  gym,
+  gymPalette,
+  salon,
+  salonPalette,
+  realEstate,
+  homePalette,
+  bakery,
+  bakeryPalette,
+} from '@/lib/burst-qr/objects/biz.js';
 
 // The controller's lights in JVD green instead of IMPerfect's lime.
 const padPalette = { ...gearPalette, wash: '#7fbf9f', glow: '#2fd38a', glow2: '#c9f5dd' };
@@ -32,6 +46,12 @@ const OBJECTS = {
   cafe: { object: cafe, palette: cafePalette, menu: true, client: '' },
   mic: { object: mic, palette: micPalette, menu: false, client: '' },
   pad: { object: padOffset, palette: padPalette, menu: false, client: '' },
+  bakery: { object: bakery, palette: bakeryPalette, menu: true, client: '' },
+  barber: { object: barber, palette: barberPalette, menu: false, client: '' },
+  salon: { object: salon, palette: salonPalette, menu: false, client: '' },
+  gym: { object: gym, palette: gymPalette, menu: false, client: '' },
+  autoShop: { object: autoShop, palette: autoPalette, menu: false, client: '' },
+  home: { object: realEstate, palette: homePalette, menu: false, client: '' },
   rad: { object: rad, palette: radPalette, menu: false, client: 'Fluffcore' },
   imp: { object: controller, palette: controllerPalette, menu: false, client: 'IMPerfect' },
   twoTone: { object: padTwoTone, palette: gearPalette, menu: false, client: 'IMPerfect' },
@@ -42,10 +62,14 @@ type Obj = keyof typeof OBJECTS;
 
 // Each category: objects that burst, cards that flip, or a whole demo page shown in a frame.
 const CATEGORIES = [
-  { key: 'food', burst: ['mofongo', 'cafe'] },
+  { key: 'food', burst: ['mofongo', 'cafe', 'bakery'] },
   { key: 'flowers', frame: { src: '/lab/bloom-3d.html', client: '' } },
   { key: 'fashion', burst: ['rad'], flip: ['tag'] },
   { key: 'media', burst: ['mic'] },
+  { key: 'beauty', burst: ['barber', 'salon'] },
+  { key: 'fitness', burst: ['gym'] },
+  { key: 'auto', burst: ['autoShop'] },
+  { key: 'realestate', burst: ['home'] },
   { key: 'gaming', burst: ['pad', 'imp', 'twoTone', 'pro', 'pc'] },
   { key: 'social', flip: ['tile'], frame: { src: '/lab/socials.html', client: 'Frecuencia 787' } },
 ] as const satisfies readonly {
