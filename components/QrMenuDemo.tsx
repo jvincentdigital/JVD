@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import BurstQR from '@/lib/burst-qr/BurstQR';
-import type { BurstQR as BurstApi, BurstStyle } from '@/lib/burst-qr/burst-qr';
+import type { BurstQR as BurstApi } from '@/lib/burst-qr/burst-qr';
 import { cafe, cafePalette } from '@/lib/burst-qr/objects/cafe.js';
 import { mofongo, mofongoPalette } from '@/lib/burst-qr/objects/mofongo.js';
 
@@ -36,7 +36,6 @@ export default function QrMenuDemo() {
   const locale = useLocale();
   const [link, setLink] = useState('');
   const [dish, setDish] = useState<Dish>('mofongo');
-  const [style, setStyle] = useState<BurstStyle>('realistic');
   const [api, setApi] = useState<BurstApi | null>(null);
   const [open, setOpen] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -69,7 +68,7 @@ export default function QrMenuDemo() {
             link={link}
             object={DISHES[dish].object}
             palette={DISHES[dish].palette}
-            style={style}
+            style='realistic'
             label={t('canvasLabel')}
             onReady={setApi}
             onToggle={setOpen}
@@ -111,18 +110,6 @@ export default function QrMenuDemo() {
             {(Object.keys(DISHES) as Dish[]).map((d) => (
               <Chip key={d} on={dish === d} onClick={() => setDish(d)}>
                 {t(d)}
-              </Chip>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p className='mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-warm-gray'>
-            {t('styleLabel')}
-          </p>
-          <div className='flex flex-wrap gap-2'>
-            {(['realistic', 'watercolor'] as const).map((s) => (
-              <Chip key={s} on={style === s} onClick={() => setStyle(s)}>
-                {t(s)}
               </Chip>
             ))}
           </div>
