@@ -323,8 +323,6 @@
       "label": "DEMO EN VIVO · CÓDIGOS QR EN 3D",
       "heading": "Códigos QR que la gente quiere escanear",
       "subheading": "Toca cualquier cosa en esta página. Se convierte en un código QR real que puedes escanear con la cámara del teléfono.",
-      "burstTitle": "Se convierte en código",
-      "burstBody": "Un objeto en 3D hecho para tu negocio. Tócalo y sus piezas vuelan hasta formar un código QR. Tócalo otra vez y se arma de nuevo.",
       "objects": {
         "mofongo": {
           "name": "Mofongo",
@@ -341,6 +339,26 @@
         "pad": {
           "name": "Control de videojuegos",
           "for": "equipos de gaming, streamers y arcades: el control abre tu Discord o tu stream."
+        },
+        "rad": {
+          "name": "Rad",
+          "for": "marcas de ropa con mascota: el personaje abre tu tienda."
+        },
+        "imp": {
+          "name": "Control del equipo",
+          "for": "equipos de esports: el control del equipo abre el Discord."
+        },
+        "twoTone": {
+          "name": "Control bicolor",
+          "for": "equipos de gaming y tiendas de consolas."
+        },
+        "pro": {
+          "name": "Control pro",
+          "for": "jugadores competitivos y tiendas de equipo pro."
+        },
+        "pc": {
+          "name": "Teclado y mouse",
+          "for": "gaming en PC, centros LAN y streamers."
         }
       },
       "goodFor": "Ideal para",
@@ -368,7 +386,21 @@
       "scanTip": "Cada código aquí abre este sitio o un menú de muestra. Los tuyos abren tu menú, tu tienda o tu perfil, con tus colores.",
       "ctaHeading": "¿Quieres uno hecho para tu negocio?",
       "ctaButton": "Agenda una llamada gratis →",
-      "back": "← Volver al sitio"
+      "back": "← Volver al sitio",
+      "categoryLabel": "Categoría",
+      "categories": {
+        "food": "Comida y bebida",
+        "flowers": "Flores y regalos",
+        "fashion": "Ropa y mercancía",
+        "media": "Música y medios",
+        "gaming": "Gaming",
+        "social": "Redes sociales"
+      },
+      "clientWork": "Trabajo de cliente: {client}",
+      "frames": {
+        "flowers": "Ramos que se convierten en código: girasoles, rosas, tulipanes, hortensias y más. Ideal para floristerías, tiendas de regalos y eventos.",
+        "social": "Cuadros en neón, uno por red social, con los logos oficiales. Toca para virarlo y otra vez para abrirlo."
+      }
     },
     "menu": {
       "metaTitle": "Menú de muestra | La Fonda de Muestra",

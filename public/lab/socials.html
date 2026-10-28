@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Lab · Redes 3D · Frecuencia 787</title>
+<meta name="description" content="Prueba del lab: un cuadro 3D por red que se vira y enseña el código QR."/>
+<link rel="icon" type="image/svg+xml" href="/assets/frecuencia-787-logo.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#04060a; --bg2:#0c121d; --cyan:#16e0ff; --magenta:#ff3da6; --text:#eafdff;
+    --dim:rgba(234,253,255,.62);
+    --display:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'Space Mono',monospace;
+    --w:min(220px, 72vw); --d:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(120% 80% at 50% 0%, var(--bg2), var(--bg) 60%);color:var(--text);
+    font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100svh;overflow-x:hidden}
+  main{max-width:1040px;margin:0 auto;padding:56px 16px 64px}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);opacity:.85}
+  .badge{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta);
+    border:1px solid rgba(255,61,166,.45);border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:2px}
+  h1{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,5.5vw,2.6rem);letter-spacing:-.01em;line-height:1.05;margin-top:22px}
+  .lead{color:var(--dim);max-width:520px;margin-top:12px}
+
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;justify-items:center}
+  @media (max-width:760px){.tiles{grid-template-columns:1fr;gap:44px}}
+
+  /* One tile: a thick slab in 3D. .float bobs, .box turns (tilt + flip). */
+  .tile{--glow:var(--cyan);--rx:0deg;--ry:0deg;--flip:0deg;
+    position:relative;width:var(--w);aspect-ratio:1;border:0;background:none;cursor:pointer;color:inherit;
+    perspective:900px;-webkit-tap-highlight-color:transparent;padding:0}
+  .tile:focus-visible{outline:2px solid var(--text);outline-offset:14px;border-radius:24px}
+  .float{position:absolute;inset:0;transform-style:preserve-3d;animation:bob 5s ease-in-out infinite}
+  .tile:nth-child(2) .float{animation-delay:-1.6s}
+  .tile:nth-child(3) .float{animation-delay:-3.2s}
+  @keyframes bob{0%,100%{transform:translateY(0) rotateX(10deg) rotateY(-14deg)}50%{transform:translateY(-10px) rotateX(10deg) rotateY(14deg)}}
+  .box{position:absolute;inset:0;transform-style:preserve-3d;
+    transform:rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--flip)));
+    transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+  .tile.flipped{--flip:180deg}
+
+  .face{position:absolute;inset:0;border-radius:22px;display:grid;place-items:center;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden}
+  .front{transform:translateZ(calc(var(--d) / 2));
+    background:linear-gradient(150deg, #142033 0%, #070b12 70%);
+    border:1.5px solid var(--glow);
+    box-shadow:0 0 18px color-mix(in srgb, var(--glow) 55%, transparent),
+      inset 0 0 26px color-mix(in srgb, var(--glow) 28%, transparent);
+    align-content:center;gap:18px}
+  .front::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,0) 40%)}
+  .logo{width:38%;height:auto;display:block}
+  .name{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+  .back{transform:rotateY(180deg) translateZ(calc(var(--d) / 2));background:#fff;
+    border:1.5px solid var(--glow);
+    box-shadow:0 0 18px color-mix(in srgb, var(--glow) 55%, transparent);
+    align-content:center;gap:6px;padding:14px}
+  .back svg{width:78%;height:auto;display:block}
+  .back .scan{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#04060a}
+
+  /* the four sides of the slab: the neon tube */
+  .edge{position:absolute;left:50%;top:50%;background:var(--glow);
+    box-shadow:0 0 14px var(--glow), 0 0 32px color-mix(in srgb, var(--glow) 60%, transparent)}
+  .edge.t,.edge.b{width:calc(100% - 44px);height:var(--d)}
+  .edge.l,.edge.r{width:var(--d);height:calc(100% - 44px)}
+  .edge.t{transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--w) / 2))}
+  .edge.b{transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--w) / 2))}
+  .edge.l{transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--w) / 2))}
+  .edge.r{transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--w) / 2))}
+
+  .pool{position:absolute;left:8%;right:8%;bottom:-34px;height:26px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side, color-mix(in srgb, var(--glow) 45%, transparent), transparent);
+    animation:pool 5s ease-in-out infinite}
+  .tile:nth-child(2) .pool{animation-delay:-1.6s}
+  .tile:nth-child(3) .pool{animation-delay:-3.2s}
+  @keyframes pool{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.55;transform:scaleX(.85)}}
+
+  .hint{margin-top:60px;text-align:center;font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--dim);min-height:1.6em}
+  .meta{margin-top:40px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:rgba(234,253,255,.45);text-align:center}
+
+  @media (prefers-reduced-motion: reduce){
+    .float,.pool{animation:none}
+    .float{transform:none}
+    .box{transition:none}
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Frecuencia 787 <span class="badge">Prueba</span></p>
+  <h1>Las redes, en 3D</h1>
+  <p class="lead">Toca un cuadro y se vira para enseñarte el código QR. Tócalo otra vez y abre el perfil.</p>
+
+  <div class="tiles">
+    <button class="tile" type="button" style="--glow:#ff3da6" data-name="Instagram" data-url="https://instagram.com/frecuencia787">
+      <span class="float"><span class="box">
+        <span class="face front">
+          <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+          <span class="name">Instagram</span>
+        </span>
+        <span class="face back"></span>
+        <span class="edge t"></span><span class="edge b"></span><span class="edge l"></span><span class="edge r"></span>
+      </span></span>
+      <span class="pool"></span>
+    </button>
+
+    <button class="tile" type="button" style="--glow:#16e0ff" data-name="YouTube" data-url="https://youtube.com/@frecuencia787">
+      <span class="float"><span class="box">
+        <span class="face front">
+          <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><polygon fill="#ffffff" points="9.2,8 9.2,16 16.3,12"/><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span class="name">YouTube</span>
+        </span>
+        <span class="face back"></span>
+        <span class="edge t"></span><span class="edge b"></span><span class="edge l"></span><span class="edge r"></span>
+      </span></span>
+      <span class="pool"></span>
+    </button>
+
+    <button class="tile" type="button" style="--glow:#53FC19" data-name="Kick" data-url="https://kick.com/frecuencia787">
+      <span class="float"><span class="box">
+        <span class="face front">
+          <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#53FC19" d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z"/></svg>
+          <span class="name">Kick</span>
+        </span>
+        <span class="face back"></span>
+        <span class="edge t"></span><span class="edge b"></span><span class="edge l"></span><span class="edge r"></span>
+      </span></span>
+      <span class="pool"></span>
+    </button>
+  </div>
+
+  <p class="hint" id="hint" aria-live="polite"></p>
+  <p class="meta">Página de prueba del lab. No es parte del sitio y no sale en el menú. Instagram, YouTube y Kick son marcas de sus dueños.</p>
+</main>
+
+<script type="module">
+  import { encodeQR } from './socials/qr.js';
+
+  const tiles = [...document.querySelectorAll('.tile')];
+  const hint = document.getElementById('hint');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The code: dark squares on white with the 4-square quiet zone, as one SVG path.
+  function qrSvg(url) {
+    const { size, modules } = encodeQR(url, { ecl: 'M' });
+    const n = size + 8;
+    let d = '';
+    modules.forEach((row, y) => row.forEach((dark, x) => { if (dark) d += `M${x + 4} ${y + 4}h1v1h-1z`; }));
+    return `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" role="img" aria-label="Código QR"><rect width="${n}" height="${n}" fill="#fff"/><path d="${d}" fill="#04060a"/></svg>`;
+  }
+
+  function label(t) {
+    const name = t.dataset.name;
+    t.setAttribute('aria-label', t.classList.contains('flipped')
+      ? `${name}: código QR a la vista. Presiona otra vez para abrir el perfil.`
+      : `${name} de Frecuencia 787. Presiona para ver el código QR.`);
+  }
+
+  function setFlipped(t, on) {
+    t.classList.toggle('flipped', on);
+    label(t);
+  }
+
+  for (const t of tiles) {
+    t.querySelector('.back').innerHTML = qrSvg(t.dataset.url) + '<span class="scan">Escanea o toca otra vez</span>';
+    label(t);
+
+    t.addEventListener('click', () => {
+      if (!t.classList.contains('flipped')) {
+        tiles.forEach((o) => o !== t && setFlipped(o, false)); // one code at a time
+        setFlipped(t, true);
+        hint.textContent = `Escanea el código de ${t.dataset.name}, o toca otra vez para abrirlo.`;
+      } else {
+        window.open(t.dataset.url, '_blank', 'noopener');
+        setFlipped(t, false);
+        hint.textContent = '';
+      }
+    });
+
+    // Tilt toward the pointer (mouse only; off with reduced motion).
+    if (!reduce) {
+      t.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        const r = t.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        t.style.setProperty('--ry', `${x * 22}deg`);
+        t.style.setProperty('--rx', `${-y * 22}deg`);
+      });
+      t.addEventListener('pointerleave', () => { t.style.setProperty('--ry', '0deg'); t.style.setProperty('--rx', '0deg'); });
+    }
+  }
+
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { tiles.forEach((t) => setFlipped(t, false)); hint.textContent = ''; }
+  });
+</script>
+</body>
+</html>

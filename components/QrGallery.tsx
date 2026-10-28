@@ -1,7 +1,9 @@
 'use client';
 
-// Every 3D-to-QR style we offer, on one page: objects that burst into a code (3D engine)
-// and cards that flip to one (plain CSS). All generic: no client's brand on any of them.
+// Every 3D-to-QR style we have made, by category: objects that burst into a code (3D engine),
+// cards that flip to one (plain CSS) and two full demo pages in a frame (flowers, neon social tiles).
+// LAB: client pieces (Fluffcore, IMPerfect, Frecuencia) are shown for John's review only; drop them
+// (client !== '') before this page goes public.
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -11,18 +13,48 @@ import { encodeQR } from '@/lib/burst-qr/qr.js';
 import { cafe, cafePalette } from '@/lib/burst-qr/objects/cafe.js';
 import { mofongo, mofongoPalette } from '@/lib/burst-qr/objects/mofongo.js';
 import { mic, micPalette } from '@/lib/burst-qr/objects/mic.js';
-import { padOffset, gearPalette } from '@/lib/burst-qr/objects/gear.js';
+import {
+  padOffset,
+  padTwoTone,
+  padPro,
+  pcSetup,
+  gearPalette,
+} from '@/lib/burst-qr/objects/gear.js';
+import { controller, controllerPalette } from '@/lib/burst-qr/objects/controller.js';
+import { rad, radPalette } from '@/lib/burst-qr/objects/rad.js';
 
 // The controller's lights in JVD green instead of IMPerfect's lime.
 const padPalette = { ...gearPalette, wash: '#7fbf9f', glow: '#2fd38a', glow2: '#c9f5dd' };
 
+// client: pieces made for a client (their brand); test page only, strip them before the page goes public.
 const OBJECTS = {
-  mofongo: { object: mofongo, palette: mofongoPalette, menu: true },
-  cafe: { object: cafe, palette: cafePalette, menu: true },
-  mic: { object: mic, palette: micPalette, menu: false },
-  pad: { object: padOffset, palette: padPalette, menu: false },
+  mofongo: { object: mofongo, palette: mofongoPalette, menu: true, client: '' },
+  cafe: { object: cafe, palette: cafePalette, menu: true, client: '' },
+  mic: { object: mic, palette: micPalette, menu: false, client: '' },
+  pad: { object: padOffset, palette: padPalette, menu: false, client: '' },
+  rad: { object: rad, palette: radPalette, menu: false, client: 'Fluffcore' },
+  imp: { object: controller, palette: controllerPalette, menu: false, client: 'IMPerfect' },
+  twoTone: { object: padTwoTone, palette: gearPalette, menu: false, client: 'IMPerfect' },
+  pro: { object: padPro, palette: gearPalette, menu: false, client: 'IMPerfect' },
+  pc: { object: pcSetup, palette: gearPalette, menu: false, client: 'IMPerfect' },
 } as const;
 type Obj = keyof typeof OBJECTS;
+
+// Each category: objects that burst, cards that flip, or a whole demo page shown in a frame.
+const CATEGORIES = [
+  { key: 'food', burst: ['mofongo', 'cafe'] },
+  { key: 'flowers', frame: { src: '/lab/bloom-3d.html', client: '' } },
+  { key: 'fashion', burst: ['rad'], flip: ['tag'] },
+  { key: 'media', burst: ['mic'] },
+  { key: 'gaming', burst: ['pad', 'imp', 'twoTone', 'pro', 'pc'] },
+  { key: 'social', flip: ['tile'], frame: { src: '/lab/socials.html', client: 'Frecuencia 787' } },
+] as const satisfies readonly {
+  key: string;
+  burst?: readonly Obj[];
+  flip?: readonly ('tag' | 'tile')[];
+  frame?: { src: string; client: string };
+}[];
+type Cat = (typeof CATEGORIES)[number];
 
 // A path on this same site, so codes work on localhost, previews and production. A Vercel
 // share key after # (#share=KEY) goes into the code too; it never reaches the server or git.
@@ -126,121 +158,172 @@ function FlipCard({
 export default function QrGallery() {
   const t = useTranslations('demo.qrGallery');
   const locale = useLocale();
+  const [cat, setCat] = useState<Cat>(CATEGORIES[0]);
   const [obj, setObj] = useState<Obj>('mofongo');
   const [open, setOpen] = useState(false);
   const [failed, setFailed] = useState(false);
   const menuLink = useSiteLink(`/${locale}/demo/menu`);
   const homeLink = useSiteLink(`/${locale}`);
   const link = OBJECTS[obj].menu ? menuLink : homeLink;
+  const burst: readonly Obj[] = 'burst' in cat ? cat.burst : [];
+  const flip: readonly ('tag' | 'tile')[] = 'flip' in cat ? cat.flip : [];
+  const frame = 'frame' in cat ? cat.frame : null;
+
+  const pickCat = (c: Cat) => {
+    setCat(c);
+    setOpen(false);
+    if ('burst' in c) setObj(c.burst[0]);
+  };
 
   return (
-    <div className='space-y-16'>
-      <section aria-labelledby='burst-title'>
-        <h2 id='burst-title' className='font-serif text-2xl font-bold text-charcoal'>
-          {t('burstTitle')}
-        </h2>
-        <p className='mt-2 max-w-2xl text-warm-gray'>{t('burstBody')}</p>
-        <div className='mt-6 flex flex-wrap gap-2'>
-          {(Object.keys(OBJECTS) as Obj[]).map((k) => (
-            <Chip key={k} on={obj === k} onClick={() => setObj(k)}>
-              {t(`objects.${k}.name`)}
-            </Chip>
-          ))}
-        </div>
-        <div className='relative mt-4 h-[24rem] overflow-hidden rounded-2xl border border-border bg-cream sm:h-[60vh] sm:max-h-[560px] sm:min-h-[360px]'>
-          {link && !failed && (
-            // key: a new object needs a fresh engine (its link and palette change too)
-            <BurstQR
-              key={obj}
-              className='absolute inset-0'
-              link={link}
-              object={OBJECTS[obj].object}
-              palette={OBJECTS[obj].palette}
-              label={t('canvasLabel')}
-              onToggle={setOpen}
-              onError={() => setFailed(true)}
+    <div className='space-y-10'>
+      <div
+        role='group'
+        aria-label={t('categoryLabel')}
+        className='flex flex-wrap justify-center gap-2'
+      >
+        {CATEGORIES.map((c) => (
+          <Chip key={c.key} on={cat.key === c.key} onClick={() => pickCat(c)}>
+            {t(`categories.${c.key}`)}
+          </Chip>
+        ))}
+      </div>
+
+      {burst.length > 0 && (
+        <section aria-label={t(`categories.${cat.key}`)}>
+          {burst.length > 1 && (
+            <div className='mb-4 flex flex-wrap gap-2'>
+              {burst.map((k) => (
+                <Chip key={k} on={obj === k} onClick={() => setObj(k)}>
+                  {t(`objects.${k}.name`)}
+                </Chip>
+              ))}
+            </div>
+          )}
+          <div className='relative h-[24rem] overflow-hidden rounded-2xl border border-border bg-cream sm:h-[60vh] sm:max-h-[560px] sm:min-h-[360px]'>
+            {link && !failed && (
+              // key: a new object needs a fresh engine (its link and palette change too)
+              <BurstQR
+                key={obj}
+                className='absolute inset-0'
+                link={link}
+                object={OBJECTS[obj].object}
+                palette={OBJECTS[obj].palette}
+                label={t('canvasLabel')}
+                onToggle={setOpen}
+                onError={() => setFailed(true)}
+              />
+            )}
+            {failed && (
+              <p className='grid h-full place-items-center p-8 text-center text-warm-gray'>
+                {t('error')}
+              </p>
+            )}
+            <p className='pointer-events-none absolute bottom-4 left-0 right-0 text-center font-serif text-sm italic text-warm-gray'>
+              {open ? t('tapBack') : t('tapHint')}
+            </p>
+          </div>
+          <p className='mt-3 text-sm text-warm-gray'>
+            <span className='font-semibold text-charcoal'>{t('goodFor')}</span>{' '}
+            {t(`objects.${obj}.for`)}
+            {OBJECTS[obj].client && (
+              <span className='ml-2 rounded-full bg-charcoal px-2 py-0.5 text-xs font-semibold text-white'>
+                {t('clientWork', { client: OBJECTS[obj].client })}
+              </span>
+            )}
+            {OBJECTS[obj].menu && (
+              <>
+                {' '}
+                <Link
+                  href={`/${locale}/demo/qr-menu`}
+                  className='font-semibold text-accent-dark underline-offset-4 hover:underline'
+                >
+                  {t('menuDemo')}
+                </Link>
+              </>
+            )}
+          </p>
+        </section>
+      )}
+
+      {frame && (
+        <section aria-label={t(`frames.${cat.key}`)}>
+          <p className='mb-3 text-sm text-warm-gray'>
+            {t(`frames.${cat.key}`)}
+            {frame.client && (
+              <span className='ml-2 rounded-full bg-charcoal px-2 py-0.5 text-xs font-semibold text-white'>
+                {t('clientWork', { client: frame.client })}
+              </span>
+            )}
+          </p>
+          {homeLink && (
+            <iframe
+              title={t(`frames.${cat.key}`)}
+              src={`${frame.src}?link=${encodeURIComponent(homeLink)}`}
+              className='h-[44rem] w-full rounded-2xl border border-border bg-white'
+              loading='lazy'
             />
           )}
-          {failed && (
-            <p className='grid h-full place-items-center p-8 text-center text-warm-gray'>
-              {t('error')}
-            </p>
-          )}
-          <p className='pointer-events-none absolute bottom-4 left-0 right-0 text-center font-serif text-sm italic text-warm-gray'>
-            {open ? t('tapBack') : t('tapHint')}
-          </p>
-        </div>
-        <p className='mt-3 text-sm text-warm-gray'>
-          <span className='font-semibold text-charcoal'>{t('goodFor')}</span>{' '}
-          {t(`objects.${obj}.for`)}
-          {OBJECTS[obj].menu && (
-            <>
-              {' '}
-              <Link
-                href={`/${locale}/demo/qr-menu`}
-                className='font-semibold text-accent-dark underline-offset-4 hover:underline'
-              >
-                {t('menuDemo')}
-              </Link>
-            </>
-          )}
-        </p>
-      </section>
+        </section>
+      )}
 
-      <section aria-labelledby='flip-title'>
-        <h2 id='flip-title' className='font-serif text-2xl font-bold text-charcoal'>
-          {t('flipTitle')}
-        </h2>
-        <p className='mt-2 max-w-2xl text-warm-gray'>{t('flipBody')}</p>
-        <div className='mt-8 grid justify-items-center gap-10 rounded-2xl border border-border bg-cream px-4 py-10 sm:grid-cols-2'>
-          <figure className='grid justify-items-center gap-4'>
-            <FlipCard
-              link={homeLink}
-              shape='tag'
-              label={[t('tag.label'), t('tag.labelBack')]}
-              back={t('scanBack')}
-            >
-              <span
-                aria-hidden='true'
-                className='absolute top-3 h-3.5 w-3.5 rounded-full bg-cream ring-2 ring-white/70'
-              />
-              <span className='font-serif text-3xl font-bold'>{t('tag.brand')}</span>
-              <span className='text-sm text-white/85'>{t('tag.line')}</span>
-            </FlipCard>
-            <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
-              {t('tag.for')}
-            </figcaption>
-          </figure>
-          <figure className='grid justify-items-center gap-4'>
-            <FlipCard
-              link={homeLink}
-              shape='tile'
-              label={[t('tile.label'), t('tile.labelBack')]}
-              back={t('scanBack')}
-            >
-              <svg
-                aria-hidden='true'
-                viewBox='0 0 24 24'
-                className='h-14 w-14'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='1.8'
-              >
-                <circle cx='18' cy='5' r='3' />
-                <circle cx='6' cy='12' r='3' />
-                <circle cx='18' cy='19' r='3' />
-                <path d='m8.6 13.5 6.8 4M15.4 6.5l-6.8 4' />
-              </svg>
-              <span className='text-sm font-semibold uppercase tracking-[0.14em]'>
-                {t('tile.name')}
-              </span>
-            </FlipCard>
-            <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
-              {t('tile.for')}
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+      {flip.length > 0 && (
+        <section aria-label={t('flipTitle')}>
+          <p className='mb-3 text-sm text-warm-gray'>{t('flipBody')}</p>
+          <div className='flex flex-wrap justify-center gap-x-24 gap-y-10 rounded-2xl border border-border bg-cream px-4 py-10'>
+            {flip.includes('tag') && (
+              <figure className='grid justify-items-center gap-4'>
+                <FlipCard
+                  link={homeLink}
+                  shape='tag'
+                  label={[t('tag.label'), t('tag.labelBack')]}
+                  back={t('scanBack')}
+                >
+                  <span
+                    aria-hidden='true'
+                    className='absolute top-3 h-3.5 w-3.5 rounded-full bg-cream ring-2 ring-white/70'
+                  />
+                  <span className='font-serif text-3xl font-bold'>{t('tag.brand')}</span>
+                  <span className='text-sm text-white/85'>{t('tag.line')}</span>
+                </FlipCard>
+                <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
+                  {t('tag.for')}
+                </figcaption>
+              </figure>
+            )}
+            {flip.includes('tile') && (
+              <figure className='grid justify-items-center gap-4'>
+                <FlipCard
+                  link={homeLink}
+                  shape='tile'
+                  label={[t('tile.label'), t('tile.labelBack')]}
+                  back={t('scanBack')}
+                >
+                  <svg
+                    aria-hidden='true'
+                    viewBox='0 0 24 24'
+                    className='h-14 w-14'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='1.8'
+                  >
+                    <circle cx='18' cy='5' r='3' />
+                    <circle cx='6' cy='12' r='3' />
+                    <circle cx='18' cy='19' r='3' />
+                    <path d='m8.6 13.5 6.8 4M15.4 6.5l-6.8 4' />
+                  </svg>
+                  <span className='text-sm font-semibold uppercase tracking-[0.14em]'>
+                    {t('tile.name')}
+                  </span>
+                </FlipCard>
+                <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
+                  {t('tile.for')}
+                </figcaption>
+              </figure>
+            )}
+          </div>
+        </section>
+      )}
 
       <p className='text-center text-sm text-warm-gray'>{t('scanTip')}</p>
     </div>

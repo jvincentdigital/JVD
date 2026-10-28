@@ -317,8 +317,6 @@
       "label": "LIVE DEMO · 3D QR CODES",
       "heading": "QR codes people actually want to scan",
       "subheading": "Tap anything on this page. It turns into a real QR code you can scan with your phone camera.",
-      "burstTitle": "Burst into a code",
-      "burstBody": "A 3D object made for your business. Tap it and its pieces fly into a scannable QR code. Tap again and it puts itself back together.",
       "objects": {
         "mofongo": {
           "name": "Mofongo",
@@ -335,6 +333,26 @@
         "pad": {
           "name": "Game controller",
           "for": "gaming teams, streamers and arcades: the controller opens your Discord or stream."
+        },
+        "rad": {
+          "name": "Rad",
+          "for": "clothing brands with a mascot: the character opens your shop."
+        },
+        "imp": {
+          "name": "Team pad",
+          "for": "esports teams: the team's own controller opens the Discord."
+        },
+        "twoTone": {
+          "name": "Two-tone pad",
+          "for": "gaming teams and console shops."
+        },
+        "pro": {
+          "name": "Pro pad",
+          "for": "competitive players and pro gear shops."
+        },
+        "pc": {
+          "name": "Keyboard and mouse",
+          "for": "PC gaming, LAN centers and streamers."
         }
       },
       "goodFor": "Good for",
@@ -362,7 +380,21 @@
       "scanTip": "Every code here opens this site or a sample menu. Yours open your menu, shop or profile, in your colors.",
       "ctaHeading": "Want one made for your business?",
       "ctaButton": "Get your free plan →",
-      "back": "← Back to the site"
+      "back": "← Back to the site",
+      "categoryLabel": "Category",
+      "categories": {
+        "food": "Food & drink",
+        "flowers": "Flowers & gifts",
+        "fashion": "Fashion & merch",
+        "media": "Music & media",
+        "gaming": "Gaming",
+        "social": "Social media"
+      },
+      "clientWork": "Client work: {client}",
+      "frames": {
+        "flowers": "Bouquets that burst into a code: sunflowers, roses, tulips, hydrangeas and more. Good for florists, gift shops and events.",
+        "social": "Neon tiles, one per social network, with the official logos. Tap to flip, tap again to open."
+      }
     },
     "menu": {
       "metaTitle": "Sample Menu | La Fonda de Muestra",

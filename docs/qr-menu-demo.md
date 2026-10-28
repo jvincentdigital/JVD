@@ -21,3 +21,7 @@ The sales page for every 3D-to-QR style, in English and Spanish, hidden from sea
 - **Flip to a code** (plain CSS): a hangtag and a "Follow us" tile. First tap flips to the code, second tap opens the link, Escape flips back.
 - **Generic only** (John, 2026-10-27): no client's brand, colours or logo (no Frecuencia, IMPerfect or Fluffcore/Rad), and no real social network logos.
 - Engine files are copies of `/home/john/jvd-outputs/burst-qr/` (canonical). Fix things there and copy again.
+
+### Categories and lab pieces (2026-10-27, later)
+
+John asked for everything we have made, by category, on the lab branch only: Food & drink, Flowers & gifts, Fashion & merch, Music & media, Gaming, Social media. Client pieces carry a "Client work" badge (`client` in `OBJECTS` / `CATEGORIES`): Rad (Fluffcore), the IMPerfect team pad, two-tone, pro pad and keyboard + mouse, and the Frecuencia neon social tiles. **Remove every client piece before this page goes public** (John chose generic only for the public page). The flowers (Bloom QR, `public/lab/bloom-3d.html`) and the neon tiles (`public/lab/socials.html`) are whole demo pages shown in an iframe; `next.config.mjs` lets `/lab/*` be framed by this site only (`frame-ancestors 'self'`), everything else stays `'none'`.
