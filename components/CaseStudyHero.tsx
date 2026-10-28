@@ -17,7 +17,7 @@ export default function CaseStudyHero({ locale, client, category, color, breadcr
             <li>
               <Link
                 href={`/${locale}#work`}
-                className='rounded transition-colors hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+                className='rounded transition-colors hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
               >
                 {breadcrumbWork}
               </Link>
