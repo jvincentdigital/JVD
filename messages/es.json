@@ -336,29 +336,9 @@
           "name": "Micrófono",
           "for": "podcasts, radio y creadores: el micrófono abre tu canal."
         },
-        "pad": {
-          "name": "Control de videojuegos",
-          "for": "equipos de gaming, streamers y arcades: el control abre tu Discord o tu stream."
-        },
         "rad": {
           "name": "Rad",
           "for": "marcas de ropa con mascota: el personaje abre tu tienda."
-        },
-        "imp": {
-          "name": "Control del equipo",
-          "for": "equipos de esports: el control del equipo abre el Discord."
-        },
-        "twoTone": {
-          "name": "Control bicolor",
-          "for": "equipos de gaming y tiendas de consolas."
-        },
-        "pro": {
-          "name": "Control pro",
-          "for": "jugadores competitivos y tiendas de equipo pro."
-        },
-        "pc": {
-          "name": "Teclado y mouse",
-          "for": "gaming en PC, centros LAN y streamers."
         },
         "bakery": {
           "name": "Bizcocho",
@@ -383,6 +363,14 @@
         "home": {
           "name": "Casa y llave",
           "for": "corredores y alquileres: abre la propiedad o tu contacto."
+        },
+        "phone": {
+          "name": "Teléfono con corazones",
+          "for": "cualquier negocio en redes sociales: el teléfono abre tu perfil."
+        },
+        "arcade": {
+          "name": "Máquina de arcade",
+          "for": "arcades, barras de gaming, equipos de esports y streamers: abre tu Discord, tu stream o tus eventos."
         }
       },
       "goodFor": "Ideal para",
@@ -399,12 +387,6 @@
         "label": "Etiqueta de una marca. Presiona para virarla y ver el código QR.",
         "labelBack": "Código QR. Presiona otra vez para abrir el enlace.",
         "for": "Ropa y mercancía: la etiqueta abre tu tienda."
-      },
-      "tile": {
-        "name": "Síguenos",
-        "label": "Cuadro de redes sociales. Presiona para virarlo y ver el código QR.",
-        "labelBack": "Código QR. Presiona otra vez para abrir el enlace.",
-        "for": "Cualquier negocio: un cuadro por red social, cada uno abre tu perfil."
       },
       "scanBack": "Escanea o toca otra vez",
       "scanTip": "Cada código aquí abre este sitio o un menú de muestra. Los tuyos abren tu menú, tu tienda o tu perfil, con tus colores.",
@@ -426,8 +408,7 @@
       },
       "clientWork": "Trabajo de cliente: {client}",
       "frames": {
-        "flowers": "Ramos que se convierten en código: girasoles, rosas, tulipanes, hortensias y más. Ideal para floristerías, tiendas de regalos y eventos.",
-        "social": "Cuadros en neón, uno por red social, con los logos oficiales. Toca para virarlo y otra vez para abrirlo."
+        "flowers": "Ramos que se convierten en código: girasoles, rosas, tulipanes, hortensias y más. Ideal para floristerías, tiendas de regalos y eventos."
       }
     },
     "menu": {

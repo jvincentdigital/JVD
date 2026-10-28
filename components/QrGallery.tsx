@@ -1,8 +1,8 @@
 'use client';
 
 // Every 3D-to-QR style we have made, by category: objects that burst into a code (3D engine),
-// cards that flip to one (plain CSS) and two full demo pages in a frame (flowers, neon social tiles).
-// LAB: client pieces (Fluffcore, IMPerfect, Frecuencia) are shown for John's review only; drop them
+// a hangtag that flips to one (plain CSS) and the flower bouquets page in a frame.
+// LAB: client pieces (Rad, Fluffcore) are shown for John's review only; drop them
 // (client !== '') before this page goes public.
 
 import { useEffect, useState } from 'react';
@@ -13,14 +13,6 @@ import { encodeQR } from '@/lib/burst-qr/qr.js';
 import { cafe, cafePalette } from '@/lib/burst-qr/objects/cafe.js';
 import { mofongo, mofongoPalette } from '@/lib/burst-qr/objects/mofongo.js';
 import { mic, micPalette } from '@/lib/burst-qr/objects/mic.js';
-import {
-  padOffset,
-  padTwoTone,
-  padPro,
-  pcSetup,
-  gearPalette,
-} from '@/lib/burst-qr/objects/gear.js';
-import { controller, controllerPalette } from '@/lib/burst-qr/objects/controller.js';
 import { rad, radPalette } from '@/lib/burst-qr/objects/rad.js';
 import {
   barber,
@@ -36,27 +28,22 @@ import {
   bakery,
   bakeryPalette,
 } from '@/lib/burst-qr/objects/biz.js';
-
-// The controller's lights in JVD green instead of IMPerfect's lime.
-const padPalette = { ...gearPalette, wash: '#7fbf9f', glow: '#2fd38a', glow2: '#c9f5dd' };
+import { phone, phonePalette, arcade, arcadePalette } from '@/lib/burst-qr/objects/creative.js';
 
 // client: pieces made for a client (their brand); test page only, strip them before the page goes public.
 const OBJECTS = {
   mofongo: { object: mofongo, palette: mofongoPalette, menu: true, client: '' },
   cafe: { object: cafe, palette: cafePalette, menu: true, client: '' },
   mic: { object: mic, palette: micPalette, menu: false, client: '' },
-  pad: { object: padOffset, palette: padPalette, menu: false, client: '' },
   bakery: { object: bakery, palette: bakeryPalette, menu: true, client: '' },
   barber: { object: barber, palette: barberPalette, menu: false, client: '' },
   salon: { object: salon, palette: salonPalette, menu: false, client: '' },
   gym: { object: gym, palette: gymPalette, menu: false, client: '' },
   autoShop: { object: autoShop, palette: autoPalette, menu: false, client: '' },
   home: { object: realEstate, palette: homePalette, menu: false, client: '' },
+  phone: { object: phone, palette: phonePalette, menu: false, client: '' },
+  arcade: { object: arcade, palette: arcadePalette, menu: false, client: '' },
   rad: { object: rad, palette: radPalette, menu: false, client: 'Fluffcore' },
-  imp: { object: controller, palette: controllerPalette, menu: false, client: 'IMPerfect' },
-  twoTone: { object: padTwoTone, palette: gearPalette, menu: false, client: 'IMPerfect' },
-  pro: { object: padPro, palette: gearPalette, menu: false, client: 'IMPerfect' },
-  pc: { object: pcSetup, palette: gearPalette, menu: false, client: 'IMPerfect' },
 } as const;
 type Obj = keyof typeof OBJECTS;
 
@@ -70,12 +57,12 @@ const CATEGORIES = [
   { key: 'fitness', burst: ['gym'] },
   { key: 'auto', burst: ['autoShop'] },
   { key: 'realestate', burst: ['home'] },
-  { key: 'gaming', burst: ['pad', 'imp', 'twoTone', 'pro', 'pc'] },
-  { key: 'social', flip: ['tile'], frame: { src: '/lab/socials.html', client: 'Frecuencia 787' } },
+  { key: 'gaming', burst: ['arcade'] },
+  { key: 'social', burst: ['phone'] },
 ] as const satisfies readonly {
   key: string;
   burst?: readonly Obj[];
-  flip?: readonly ('tag' | 'tile')[];
+  flip?: readonly 'tag'[];
   frame?: { src: string; client: string };
 }[];
 type Cat = (typeof CATEGORIES)[number];
@@ -132,27 +119,25 @@ function QrSvg({ link }: { link: string }) {
   );
 }
 
-// A card that flips to a QR code on the first tap and opens the link on the second.
+// A hangtag that flips to a QR code on the first tap and opens the link on the second.
 function FlipCard({
   link,
-  shape,
   label,
   back,
   children,
 }: {
   link: string;
-  shape: 'tag' | 'tile';
   label: [string, string];
   back: string;
   children: React.ReactNode;
 }) {
   const [flipped, setFlipped] = useState(false);
-  const size = shape === 'tag' ? 'h-[300px] w-[200px]' : 'h-[220px] w-[220px]';
-  const cut =
-    shape === 'tag'
-      ? { clipPath: 'polygon(26px 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%, 0 26px)' }
-      : undefined;
-  const face = `absolute inset-0 grid content-center justify-items-center gap-3 p-5 [backface-visibility:hidden] ${shape === 'tile' ? 'rounded-3xl' : ''}`;
+  const size = 'h-[300px] w-[200px]';
+  const cut = {
+    clipPath: 'polygon(26px 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%, 0 26px)',
+  };
+  const face =
+    'absolute inset-0 grid content-center justify-items-center gap-3 p-5 [backface-visibility:hidden]';
   return (
     <button
       type='button'
@@ -190,7 +175,7 @@ export default function QrGallery() {
   const homeLink = useSiteLink(`/${locale}`);
   const link = OBJECTS[obj].menu ? menuLink : homeLink;
   const burst: readonly Obj[] = 'burst' in cat ? cat.burst : [];
-  const flip: readonly ('tag' | 'tile')[] = 'flip' in cat ? cat.flip : [];
+  const flip: readonly 'tag'[] = 'flip' in cat ? cat.flip : [];
   const frame = 'frame' in cat ? cat.frame : null;
 
   const pickCat = (c: Cat) => {
@@ -299,7 +284,6 @@ export default function QrGallery() {
               <figure className='grid justify-items-center gap-4'>
                 <FlipCard
                   link={homeLink}
-                  shape='tag'
                   label={[t('tag.label'), t('tag.labelBack')]}
                   back={t('scanBack')}
                 >
@@ -312,36 +296,6 @@ export default function QrGallery() {
                 </FlipCard>
                 <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
                   {t('tag.for')}
-                </figcaption>
-              </figure>
-            )}
-            {flip.includes('tile') && (
-              <figure className='grid justify-items-center gap-4'>
-                <FlipCard
-                  link={homeLink}
-                  shape='tile'
-                  label={[t('tile.label'), t('tile.labelBack')]}
-                  back={t('scanBack')}
-                >
-                  <svg
-                    aria-hidden='true'
-                    viewBox='0 0 24 24'
-                    className='h-14 w-14'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.8'
-                  >
-                    <circle cx='18' cy='5' r='3' />
-                    <circle cx='6' cy='12' r='3' />
-                    <circle cx='18' cy='19' r='3' />
-                    <path d='m8.6 13.5 6.8 4M15.4 6.5l-6.8 4' />
-                  </svg>
-                  <span className='text-sm font-semibold uppercase tracking-[0.14em]'>
-                    {t('tile.name')}
-                  </span>
-                </FlipCard>
-                <figcaption className='max-w-[16rem] text-center text-sm text-warm-gray'>
-                  {t('tile.for')}
                 </figcaption>
               </figure>
             )}

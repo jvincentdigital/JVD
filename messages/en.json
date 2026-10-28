@@ -330,29 +330,9 @@
           "name": "Studio mic",
           "for": "podcasts, radio and creators: the mic opens your channel."
         },
-        "pad": {
-          "name": "Game controller",
-          "for": "gaming teams, streamers and arcades: the controller opens your Discord or stream."
-        },
         "rad": {
           "name": "Rad",
           "for": "clothing brands with a mascot: the character opens your shop."
-        },
-        "imp": {
-          "name": "Team pad",
-          "for": "esports teams: the team's own controller opens the Discord."
-        },
-        "twoTone": {
-          "name": "Two-tone pad",
-          "for": "gaming teams and console shops."
-        },
-        "pro": {
-          "name": "Pro pad",
-          "for": "competitive players and pro gear shops."
-        },
-        "pc": {
-          "name": "Keyboard and mouse",
-          "for": "PC gaming, LAN centers and streamers."
         },
         "bakery": {
           "name": "Layer cake",
@@ -377,6 +357,14 @@
         "home": {
           "name": "House and key",
           "for": "realtors and rentals: opens the listing or your contact."
+        },
+        "phone": {
+          "name": "Phone with hearts",
+          "for": "any business on social media: the phone opens your profile."
+        },
+        "arcade": {
+          "name": "Arcade cabinet",
+          "for": "arcades, gaming bars, esports teams and streamers: opens your Discord, stream or events."
         }
       },
       "goodFor": "Good for",
@@ -393,12 +381,6 @@
         "label": "A brand hangtag. Press to flip it and see the QR code.",
         "labelBack": "QR code. Press again to open the link.",
         "for": "Clothing and merch: the hangtag opens your shop."
-      },
-      "tile": {
-        "name": "Follow us",
-        "label": "A social media tile. Press to flip it and see the QR code.",
-        "labelBack": "QR code. Press again to open the link.",
-        "for": "Any business: one tile per social network, each opens your profile."
       },
       "scanBack": "Scan or tap again",
       "scanTip": "Every code here opens this site or a sample menu. Yours open your menu, shop or profile, in your colors.",
@@ -420,8 +402,7 @@
       },
       "clientWork": "Client work: {client}",
       "frames": {
-        "flowers": "Bouquets that burst into a code: sunflowers, roses, tulips, hydrangeas and more. Good for florists, gift shops and events.",
-        "social": "Neon tiles, one per social network, with the official logos. Tap to flip, tap again to open."
+        "flowers": "Bouquets that burst into a code: sunflowers, roses, tulips, hydrangeas and more. Good for florists, gift shops and events."
       }
     },
     "menu": {
