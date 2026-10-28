@@ -346,18 +346,6 @@
           "name": "Polish and lipstick",
           "for": "nail and beauty salons: opens your booking page."
         },
-        "gym": {
-          "name": "Dumbbell and kettlebell",
-          "for": "gyms and trainers: opens your class schedule or sign-up."
-        },
-        "autoShop": {
-          "name": "Tire and wrench",
-          "for": "auto shops and tire centers: opens a quote form or your reviews."
-        },
-        "home": {
-          "name": "House and key",
-          "for": "realtors and rentals: opens the listing or your contact."
-        },
         "phone": {
           "name": "Phone with hearts",
           "for": "any business on social media: the phone opens your profile."
@@ -365,6 +353,18 @@
         "arcade": {
           "name": "Arcade cabinet",
           "for": "arcades, gaming bars, esports teams and streamers: opens your Discord, stream or events."
+        },
+        "gloves": {
+          "name": "Boxing gloves",
+          "for": "gyms, boxing clubs and trainers: opens your class schedule or sign-up."
+        },
+        "car": {
+          "name": "Car",
+          "for": "auto shops, dealers and car washes: opens a quote form, your stock or reviews."
+        },
+        "house": {
+          "name": "House and palm",
+          "for": "realtors and rentals: opens the listing or your contact."
         }
       },
       "goodFor": "Good for",

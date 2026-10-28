@@ -17,17 +17,13 @@ import { rad, radPalette } from '@/lib/burst-qr/objects/rad.js';
 import {
   barber,
   barberPalette,
-  autoShop,
-  autoPalette,
-  gym,
-  gymPalette,
   salon,
   salonPalette,
-  realEstate,
-  homePalette,
   bakery,
   bakeryPalette,
 } from '@/lib/burst-qr/objects/biz.js';
+import { loadModels } from '@/lib/burst-qr/objects/glb.js';
+import type { BurstObjectBuilder } from '@/lib/burst-qr/burst-qr';
 import { phone, phonePalette, arcade, arcadePalette } from '@/lib/burst-qr/objects/creative.js';
 
 // client: pieces made for a client (their brand); test page only, strip them before the page goes public.
@@ -38,14 +34,35 @@ const OBJECTS = {
   bakery: { object: bakery, palette: bakeryPalette, menu: true, client: '' },
   barber: { object: barber, palette: barberPalette, menu: false, client: '' },
   salon: { object: salon, palette: salonPalette, menu: false, client: '' },
-  gym: { object: gym, palette: gymPalette, menu: false, client: '' },
-  autoShop: { object: autoShop, palette: autoPalette, menu: false, client: '' },
-  home: { object: realEstate, palette: homePalette, menu: false, client: '' },
   phone: { object: phone, palette: phonePalette, menu: false, client: '' },
   arcade: { object: arcade, palette: arcadePalette, menu: false, client: '' },
   rad: { object: rad, palette: radPalette, menu: false, client: 'Fluffcore' },
 } as const;
-type Obj = keyof typeof OBJECTS;
+
+// Ready-made CC0 models (Grab3D, grab3d.com/license, saved 2026-10-27), loaded before the engine starts.
+const MODELS = {
+  gloves: {
+    items: [{ url: '/lab/models/boxing-gloves.glb', height: 1 }],
+    colors: ['#e8766a', '#f4a08f', '#ffffff'],
+    palette: { dark: '#1a0d0d', bg: '#f3efec', wash: '#c0392b' },
+  },
+  car: {
+    items: [{ url: '/lab/models/sedan.glb', height: 1 }],
+    colors: ['#a9cfe8', '#ffffff', '#2b2f36'],
+    palette: { dark: '#11161c', bg: '#eef0f2', wash: '#5b7a99' },
+  },
+  house: {
+    items: [
+      { url: '/lab/models/modern-house.glb', height: 1.6 },
+      { url: '/lab/models/palm-tree.glb', height: 2.2, x: 1.9, z: 0.6 },
+    ],
+    colors: ['#e9c79a', '#bcd9ea', '#9fd18b', '#ffffff'],
+    palette: { dark: '#14211a', bg: '#f0f3ec', wash: '#7fae6e' },
+  },
+} as const;
+type Model = keyof typeof MODELS;
+type Obj = keyof typeof OBJECTS | Model;
+const isModel = (k: Obj): k is Model => k in MODELS;
 
 // Each category: objects that burst, cards that flip, or a whole demo page shown in a frame.
 const CATEGORIES = [
@@ -54,9 +71,9 @@ const CATEGORIES = [
   { key: 'fashion', burst: ['rad'], flip: ['tag'] },
   { key: 'media', burst: ['mic'] },
   { key: 'beauty', burst: ['barber', 'salon'] },
-  { key: 'fitness', burst: ['gym'] },
-  { key: 'auto', burst: ['autoShop'] },
-  { key: 'realestate', burst: ['home'] },
+  { key: 'fitness', burst: ['gloves'] },
+  { key: 'auto', burst: ['car'] },
+  { key: 'realestate', burst: ['house'] },
   { key: 'gaming', burst: ['arcade'] },
   { key: 'social', burst: ['phone'] },
 ] as const satisfies readonly {
@@ -173,7 +190,22 @@ export default function QrGallery() {
   const [failed, setFailed] = useState(false);
   const menuLink = useSiteLink(`/${locale}/demo/menu`);
   const homeLink = useSiteLink(`/${locale}`);
-  const link = OBJECTS[obj].menu ? menuLink : homeLink;
+  const link = !isModel(obj) && OBJECTS[obj].menu ? menuLink : homeLink;
+  // models load first (async); the engine gets the builder once it is ready
+  const [loaded, setLoaded] = useState<{ key: Model; build: BurstObjectBuilder } | null>(null);
+  useEffect(() => {
+    if (!isModel(obj)) return;
+    let alive = true;
+    loadModels(MODELS[obj].items, { colors: [...MODELS[obj].colors] })
+      .then((build: BurstObjectBuilder) => alive && setLoaded({ key: obj, build }))
+      .catch(() => alive && setFailed(true));
+    return () => {
+      alive = false;
+    };
+  }, [obj]);
+  const object = isModel(obj) ? (loaded?.key === obj ? loaded.build : null) : OBJECTS[obj].object;
+  const palette = isModel(obj) ? MODELS[obj].palette : OBJECTS[obj].palette;
+  const client = isModel(obj) ? '' : OBJECTS[obj].client;
   const burst: readonly Obj[] = 'burst' in cat ? cat.burst : [];
   const flip: readonly 'tag'[] = 'flip' in cat ? cat.flip : [];
   const frame = 'frame' in cat ? cat.frame : null;
@@ -210,14 +242,14 @@ export default function QrGallery() {
             </div>
           )}
           <div className='relative h-[24rem] overflow-hidden rounded-2xl border border-border bg-cream sm:h-[60vh] sm:max-h-[560px] sm:min-h-[360px]'>
-            {link && !failed && (
+            {link && object && !failed && (
               // key: a new object needs a fresh engine (its link and palette change too)
               <BurstQR
                 key={obj}
                 className='absolute inset-0'
                 link={link}
-                object={OBJECTS[obj].object}
-                palette={OBJECTS[obj].palette}
+                object={object}
+                palette={palette}
                 label={t('canvasLabel')}
                 onToggle={setOpen}
                 onError={() => setFailed(true)}
@@ -235,12 +267,12 @@ export default function QrGallery() {
           <p className='mt-3 text-sm text-warm-gray'>
             <span className='font-semibold text-charcoal'>{t('goodFor')}</span>{' '}
             {t(`objects.${obj}.for`)}
-            {OBJECTS[obj].client && (
+            {client && (
               <span className='ml-2 rounded-full bg-charcoal px-2 py-0.5 text-xs font-semibold text-white'>
-                {t('clientWork', { client: OBJECTS[obj].client })}
+                {t('clientWork', { client })}
               </span>
             )}
-            {OBJECTS[obj].menu && (
+            {!isModel(obj) && OBJECTS[obj].menu && (
               <>
                 {' '}
                 <Link

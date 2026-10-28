@@ -352,18 +352,6 @@
           "name": "Pintura y lápiz labial",
           "for": "salones de uñas y belleza: abre tu página de citas."
         },
-        "gym": {
-          "name": "Mancuerna y pesa rusa",
-          "for": "gimnasios y entrenadores: abre tu horario de clases o la inscripción."
-        },
-        "autoShop": {
-          "name": "Goma y llave",
-          "for": "talleres y gomeras: abre un formulario de cotización o tus reseñas."
-        },
-        "home": {
-          "name": "Casa y llave",
-          "for": "corredores y alquileres: abre la propiedad o tu contacto."
-        },
         "phone": {
           "name": "Teléfono con corazones",
           "for": "cualquier negocio en redes sociales: el teléfono abre tu perfil."
@@ -371,6 +359,18 @@
         "arcade": {
           "name": "Máquina de arcade",
           "for": "arcades, barras de gaming, equipos de esports y streamers: abre tu Discord, tu stream o tus eventos."
+        },
+        "gloves": {
+          "name": "Guantes de boxeo",
+          "for": "gimnasios, clubes de boxeo y entrenadores: abre tu horario de clases o la inscripción."
+        },
+        "car": {
+          "name": "Carro",
+          "for": "talleres, dealers y car wash: abre un formulario de cotización, tu inventario o tus reseñas."
+        },
+        "house": {
+          "name": "Casa y palma",
+          "for": "corredores y alquileres: abre la propiedad o tu contacto."
         }
       },
       "goodFor": "Ideal para",

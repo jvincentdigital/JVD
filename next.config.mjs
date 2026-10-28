@@ -10,12 +10,13 @@ const withBundleAnalyzer = bundleAnalyzer({
 const cspWith = (frameAncestors) =>
   [
     "default-src 'self'",
-    // cdn.jsdelivr.net: three.js for the 3D QR menu demo (lib/burst-qr), loaded only on that page
+    // cdn.jsdelivr.net: three.js for the 3D QR demos (lib/burst-qr), loaded only on those pages.
+  // connect-src blob: lets three.js read textures packed inside .glb models (public/lab/models).
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://cdn.jsdelivr.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data: https://fonts.gstatic.com",
-    "connect-src 'self' https://formspree.io https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+    "connect-src 'self' blob: https://formspree.io https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://va.vercel-scripts.com https://vitals.vercel-insights.com",
     `frame-ancestors ${frameAncestors}`,
     "base-uri 'self'",
     "form-action 'self' https://formspree.io",

@@ -25,3 +25,10 @@ The sales page for every 3D-to-QR style, in English and Spanish, hidden from sea
 ### Categories and lab pieces (2026-10-27, later)
 
 John asked for everything we have made, by category, on the lab branch only: Food & drink, Flowers & gifts, Fashion & merch, Music & media, Gaming, Social media. Client pieces carry a "Client work" badge (`client` in `OBJECTS` / `CATEGORIES`): Rad (Fluffcore), the IMPerfect team pad, two-tone, pro pad and keyboard + mouse, and the Frecuencia neon social tiles. **Remove every client piece before this page goes public** (John chose generic only for the public page). The flowers (Bloom QR, `public/lab/bloom-3d.html`) and the neon tiles (`public/lab/socials.html`) are whole demo pages shown in an iframe; `next.config.mjs` lets `/lab/*` be framed by this site only (`frame-ancestors 'self'`), everything else stays `'none'`.
+
+### Second pass (2026-10-27 night): John's feedback
+
+- **Removed:** the tire, dumbbell, coded house, the controllers and the square social tiles (John did not like them).
+- **New, our own code** (`lib/burst-qr/objects/creative.js`): a phone with a business profile and hearts floating up (Social media; the QR is made of hearts) and a retro arcade cabinet (Gaming).
+- **New, ready-made CC0 models** (`public/lab/models/*.glb`, loaded by `lib/burst-qr/objects/glb.js`): sedan (Auto), modern house + palm tree (Real estate), boxing gloves (Fitness). Source: Grab3D, CC0 1.0, no credit needed (https://grab3d.com/license/). A copy of the license page as of 2026-10-27 and the original downloads are in `/home/john/jvd-outputs/2026-10-27/grab3d/`; research notes in `/home/john/jvd-outputs/2026-10-27/cc0-models.md`. They are game-style, not photo-real; John chose them knowing that.
+- **CSP:** `connect-src` allows `blob:` so three.js can read the textures packed inside the .glb files.
