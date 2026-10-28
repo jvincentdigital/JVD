@@ -39,6 +39,15 @@ export default async function QrMenuDemoPage({ params }: { params: Params }) {
 
           <QrMenuDemo />
 
+          <p className='mt-8 text-center'>
+            <Link
+              href={`/${locale}/demo/qr-codes`}
+              className='font-semibold text-accent-dark underline-offset-4 hover:underline'
+            >
+              {t('moreStyles')}
+            </Link>
+          </p>
+
           <div className='mt-14 rounded-xl bg-accent-dark px-6 py-10 text-center text-white'>
             <p className='text-lg font-medium'>{t('ctaHeading')}</p>
             <Link

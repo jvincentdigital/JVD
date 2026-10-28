@@ -1,4 +1,5 @@
 // Types for burst-qr.js. `three` is loaded from a CDN at runtime, so THREE types are left loose here.
+/* eslint-disable @typescript-eslint/no-explicit-any -- three.js loads from a CDN at runtime, so its types are not available here */
 
 export type BurstStyle = 'realistic' | 'watercolor';
 
@@ -35,6 +36,19 @@ export interface BurstKit {
   paint: (geo: any, fn: (x: number, y: number, z: number) => string | [string, number]) => any;
   V: (x?: number, y?: number, z?: number) => any;
   lin: (hex: string) => any;
+  /** Parent of the object and its pieces. tick() may move, turn or scale it for idle motion; it eases back to rest as the burst starts. */
+  rig: any;
+  /** True when the visitor prefers reduced motion. */
+  reduce: boolean;
+  /** Live quality tier (0 low, 1 medium, 2 high). It can step down after the first seconds. */
+  quality: { tier: number };
+}
+
+/** Pointer position relative to the canvas centre, -1 to 1 on each axis (y up). active is false until the pointer first moves. */
+export interface BurstPointer {
+  x: number;
+  y: number;
+  active: boolean;
 }
 
 export interface BurstObject {
@@ -42,8 +56,12 @@ export interface BurstObject {
   group?: any;
   /** Pieces that fly into the code. Leave out to sample pieces from the group's meshes. */
   parts?: BurstPart[];
-  /** Called every frame: time in seconds, t = 0 (object) to 1 (code). */
-  tick?: (time: number, t: number) => void;
+  /** Called every frame: time in seconds (stands still with reduced motion), t = 0 (object) to 1 (code), pointer. */
+  tick?: (time: number, t: number, pointer: BurstPointer) => void;
+  /** Turntable speed in radians a second. Default 0.25. 0 = no turntable: after a drag it eases back to `angle`. */
+  spin?: number;
+  /** Starting turn in radians (0 = front faces the camera). Default 0.3. */
+  angle?: number;
   /** Camera angle above the horizon, radians. Default 0.2. */
   elevation?: number;
   /** Radius of the object's footprint (object units), for the floor shadow. */

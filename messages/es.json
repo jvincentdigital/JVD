@@ -314,6 +314,60 @@
       "printTip": "Para las mesas imprimimos el código plano y siempre probamos el impreso antes de entregarlo.",
       "ctaHeading": "¿Quieres esto para tu restaurante, bar o cafetería?",
       "ctaButton": "Agenda una llamada gratis →",
+      "back": "← Volver al sitio",
+      "moreStyles": "Más estilos de QR en 3D →"
+    },
+    "qrGallery": {
+      "metaTitle": "Códigos QR en 3D | John Vincent Digital",
+      "metaDescription": "Todos los estilos de QR en 3D que hacemos, en vivo: objetos que se convierten en un código QR que funciona y tarjetas que se viran para enseñarlo. Para restaurantes, creadores, equipos y marcas.",
+      "label": "DEMO EN VIVO · CÓDIGOS QR EN 3D",
+      "heading": "Códigos QR que la gente quiere escanear",
+      "subheading": "Toca cualquier cosa en esta página. Se convierte en un código QR real que puedes escanear con la cámara del teléfono.",
+      "burstTitle": "Se convierte en código",
+      "burstBody": "Un objeto en 3D hecho para tu negocio. Tócalo y sus piezas vuelan hasta formar un código QR. Tócalo otra vez y se arma de nuevo.",
+      "objects": {
+        "mofongo": {
+          "name": "Mofongo",
+          "for": "restaurantes y cocinas: el plato abre tu menú."
+        },
+        "cafe": {
+          "name": "Café con leche",
+          "for": "cafeterías y panaderías: la taza abre tu menú."
+        },
+        "mic": {
+          "name": "Micrófono",
+          "for": "podcasts, radio y creadores: el micrófono abre tu canal."
+        },
+        "pad": {
+          "name": "Control de videojuegos",
+          "for": "equipos de gaming, streamers y arcades: el control abre tu Discord o tu stream."
+        }
+      },
+      "goodFor": "Ideal para",
+      "menuDemo": "Ver el demo completo del menú →",
+      "canvasLabel": "Objeto en 3D. Presiona Enter para convertirlo en un código QR.",
+      "tapHint": "Tócalo para hacer el código QR",
+      "tapBack": "Tócalo otra vez para que vuelva",
+      "error": "Este demo necesita WebGL, que tu navegador tiene apagado.",
+      "flipTitle": "Se vira y enseña el código",
+      "flipBody": "Más liviano y carga más rápido. Toca la tarjeta y se vira para enseñar el código; tócala otra vez y abre el enlace.",
+      "tag": {
+        "brand": "Tu Marca",
+        "line": "Hecho en Puerto Rico",
+        "label": "Etiqueta de una marca. Presiona para virarla y ver el código QR.",
+        "labelBack": "Código QR. Presiona otra vez para abrir el enlace.",
+        "for": "Ropa y mercancía: la etiqueta abre tu tienda."
+      },
+      "tile": {
+        "name": "Síguenos",
+        "label": "Cuadro de redes sociales. Presiona para virarlo y ver el código QR.",
+        "labelBack": "Código QR. Presiona otra vez para abrir el enlace.",
+        "for": "Cualquier negocio: un cuadro por red social, cada uno abre tu perfil."
+      },
+      "scanBack": "Escanea o toca otra vez",
+      "scanTip": "Cada código aquí abre este sitio o un menú de muestra. Los tuyos abren tu menú, tu tienda o tu perfil, con tus colores.",
+      "ctaHeading": "¿Quieres uno hecho para tu negocio?",
+      "ctaButton": "Agenda una llamada gratis →",
       "back": "← Volver al sitio"
     },
     "menu": {

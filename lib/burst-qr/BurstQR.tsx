@@ -37,7 +37,10 @@ export default function BurstQR({
   const el = useRef<HTMLDivElement>(null);
   const api = useRef<BurstQRApi | null>(null);
   const latest = useRef({ link, object, palette, style, onToggle, onReady, onError });
-  latest.current = { link, object, palette, style, onToggle, onReady, onError };
+  // keep the latest props for the engine's callbacks (runs before the effects below)
+  useEffect(() => {
+    latest.current = { link, object, palette, style, onToggle, onReady, onError };
+  });
 
   // create once, destroy on unmount
   useEffect(() => {

@@ -308,6 +308,60 @@
       "printTip": "For table cards we print the flat code and always test-scan the real print.",
       "ctaHeading": "Want this for your restaurant, bar or café?",
       "ctaButton": "Get your free plan →",
+      "back": "← Back to the site",
+      "moreStyles": "More 3D QR styles →"
+    },
+    "qrGallery": {
+      "metaTitle": "3D QR Codes | John Vincent Digital",
+      "metaDescription": "Every 3D QR style we make, live: objects that burst into a working QR code, and cards that flip to one. For restaurants, creators, teams and brands.",
+      "label": "LIVE DEMO · 3D QR CODES",
+      "heading": "QR codes people actually want to scan",
+      "subheading": "Tap anything on this page. It turns into a real QR code you can scan with your phone camera.",
+      "burstTitle": "Burst into a code",
+      "burstBody": "A 3D object made for your business. Tap it and its pieces fly into a scannable QR code. Tap again and it puts itself back together.",
+      "objects": {
+        "mofongo": {
+          "name": "Mofongo",
+          "for": "restaurants and kitchens: the plate opens your menu."
+        },
+        "cafe": {
+          "name": "Café con leche",
+          "for": "cafés and bakeries: the cup opens your menu."
+        },
+        "mic": {
+          "name": "Studio mic",
+          "for": "podcasts, radio and creators: the mic opens your channel."
+        },
+        "pad": {
+          "name": "Game controller",
+          "for": "gaming teams, streamers and arcades: the controller opens your Discord or stream."
+        }
+      },
+      "goodFor": "Good for",
+      "menuDemo": "See the full menu demo →",
+      "canvasLabel": "3D object. Press Enter to turn it into a QR code.",
+      "tapHint": "Tap it to make the QR code",
+      "tapBack": "Tap again to bring it back",
+      "error": "This demo needs WebGL, which your browser has turned off.",
+      "flipTitle": "Flip to a code",
+      "flipBody": "Lighter and quicker to load. Tap the card and it flips to show the code; tap again and it opens the link.",
+      "tag": {
+        "brand": "Your Brand",
+        "line": "Made in Puerto Rico",
+        "label": "A brand hangtag. Press to flip it and see the QR code.",
+        "labelBack": "QR code. Press again to open the link.",
+        "for": "Clothing and merch: the hangtag opens your shop."
+      },
+      "tile": {
+        "name": "Follow us",
+        "label": "A social media tile. Press to flip it and see the QR code.",
+        "labelBack": "QR code. Press again to open the link.",
+        "for": "Any business: one tile per social network, each opens your profile."
+      },
+      "scanBack": "Scan or tap again",
+      "scanTip": "Every code here opens this site or a sample menu. Yours open your menu, shop or profile, in your colors.",
+      "ctaHeading": "Want one made for your business?",
+      "ctaButton": "Get your free plan →",
       "back": "← Back to the site"
     },
     "menu": {
