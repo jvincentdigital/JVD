@@ -12,3 +12,12 @@
 ## Checking it
 
 There is no GPU in headless test browsers, so the scene runs at about 3 frames a second there and a real tap takes about 15 seconds to finish. Decode the live canvas (`canvas.toDataURL()`) and the Download PNG with jsQR. Both should give the exact `/[locale]/demo/menu` URL in both styles and for both dishes.
+
+## 3D QR gallery (`/[locale]/demo/qr-codes`), 2026-10-27
+
+The sales page for every 3D-to-QR style, in English and Spanish, hidden from search like the menu demo. Linked from the QR menu demo ("More 3D QR styles").
+
+- **Burst into a code** (`components/QrGallery.tsx`, 3D engine): mofongo and café con leche (codes open the sample menu), a studio mic and a game controller (codes open the site home). The controller is `padOffset` from `lib/burst-qr/objects/gear.js` with JVD-green lights (`palette.glow`).
+- **Flip to a code** (plain CSS): a hangtag and a "Follow us" tile. First tap flips to the code, second tap opens the link, Escape flips back.
+- **Generic only** (John, 2026-10-27): no client's brand, colours or logo (no Frecuencia, IMPerfect or Fluffcore/Rad), and no real social network logos.
+- Engine files are copies of `/home/john/jvd-outputs/burst-qr/` (canonical). Fix things there and copy again.
