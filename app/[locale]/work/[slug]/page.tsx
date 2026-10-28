@@ -93,7 +93,7 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
       />
       <a
         href='#main-content'
-        className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white focus:outline-none'
+        className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent-dark focus:px-4 focus:py-2 focus:text-white focus:outline-none'
       >
         Skip to content
       </a>
@@ -153,7 +153,7 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
               </a>
               <Link
                 href={`/${locale}#contact`}
-                className='inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 font-medium text-charcoal transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+                className='inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 font-medium text-charcoal transition-colors hover:border-accent hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
               >
                 {t('ctaSimilar')}
               </Link>
@@ -176,7 +176,7 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
                   <div className='h-1.5' style={{ backgroundColor: cs.color }} />
                   <div className='p-6'>
                     <p className='mb-2 text-xs font-medium text-warm-gray'>{cs.category[locale]}</p>
-                    <h3 className='font-serif text-lg font-bold text-charcoal transition-colors group-hover:text-accent'>
+                    <h3 className='font-serif text-lg font-bold text-charcoal transition-colors group-hover:text-accent-dark'>
                       {cs.client}
                     </h3>
                     <p className='mt-2 line-clamp-3 text-sm text-warm-gray'>{cs.brief[locale]}</p>
