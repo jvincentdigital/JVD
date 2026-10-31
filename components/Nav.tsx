@@ -56,6 +56,10 @@ export default function Nav() {
       }}
       activeSectionId={isHome ? undefined : null}
       LinkComponent={NextLink}
+      // @jvd/ui marks the active link with text-accent. The bright green is 2.4:1
+      // over the sand sections and even accent-dark is 4.2:1, so the nav uses a
+      // deeper green (#006B43, 5.2:1).
+      className='[--accent:158_100%_21%]'
     />
   );
 }
