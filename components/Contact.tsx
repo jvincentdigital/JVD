@@ -2,15 +2,24 @@
 
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { track } from '@vercel/analytics';
 import { ContactForm, type ContactFieldDef } from '@jvd/ui/sections';
 import ScrollReveal from './ScrollReveal';
+
+// Spam guard, no third-party service: a person needs more than a few seconds to
+// fill the form. Bots that fill the honeypot or post instantly get the normal
+// success screen but nothing is sent. Formspree also checks `_gotcha`.
+export const MIN_FILL_MS = 3000;
 
 export default function Contact() {
   const t = useTranslations('contact');
   const searchParams = useSearchParams();
   const preselected = searchParams.get('service') ?? '';
+  const shownAt = useRef(0);
+  useEffect(() => {
+    shownAt.current = Date.now();
+  }, []);
 
   const fields: ContactFieldDef[] = useMemo(
     () => [
@@ -66,6 +75,10 @@ export default function Contact() {
   );
 
   async function handleSubmit(data: Record<string, string>) {
+    if (data.gotcha || Date.now() - shownAt.current < MIN_FILL_MS) {
+      track('contact_form_blocked', { reason: data.gotcha ? 'honeypot' : 'too_fast' });
+      return;
+    }
     const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? 'xrerbdlw';
     const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
       method: 'POST',
@@ -118,7 +131,8 @@ export default function Contact() {
                 {t('whatsapp')}
               </a>
             }
-            className='mt-12'
+            // White on the bright accent is 3.1:1; the submit button uses accent-dark.
+            className='mt-12 [&_button[type=submit]]:[--accent:158_100%_24%]'
             onSubmit={handleSubmit}
           />
         </ScrollReveal>
