@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import SplitText from './motion/SplitText';
 import { gsap, useGSAP, prefersReducedMotion } from './motion/gsap';
 
@@ -12,6 +12,7 @@ import { gsap, useGSAP, prefersReducedMotion } from './motion/gsap';
  */
 export default function Hero() {
   const t = useTranslations('hero');
+  const locale = useLocale();
   const scope = useRef<HTMLElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
@@ -81,7 +82,7 @@ export default function Hero() {
           data-motion='pending'
           className='mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6'
         >
-          <a href='#services' className='btn-primary group'>
+          <a href={`/${locale}?service=accessibility#contact`} className='btn-primary group'>
             {t('cta_primary')}
             <span aria-hidden='true' className='btn-arrow'>
               &rarr;
