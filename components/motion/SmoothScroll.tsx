@@ -36,7 +36,9 @@ export default function SmoothScroll() {
       const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
       if (!target || !lenis) return;
       e.preventDefault();
-      history.pushState(null, '', url.hash);
+      // Keep the link's query (e.g. ?service=accessibility preselects the
+      // contact form); with no query the current one stays, as with a native jump.
+      history.pushState(null, '', url.search + url.hash);
       lenis.scrollTo(target, {
         onComplete: () => {
           if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
