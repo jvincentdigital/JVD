@@ -291,5 +291,60 @@
     "ctaSimilar": "Empieza un proyecto similar →",
     "otherWork": "Otros proyectos",
     "readCaseStudy": "Leer caso de estudio →"
+  },
+  "study": {
+    "skip": "Saltar al contenido",
+    "breadcrumbLabel": "Ruta de navegación",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbStudy": "Estudio de accesibilidad",
+    "eyebrow": "Investigación, {date}",
+    "title": "Cómo les va a los sitios web de pequeños negocios en Puerto Rico en accesibilidad básica",
+    "dek": "Corrimos la misma prueba automática en la página principal de {sample} pequeños negocios de Puerto Rico. Estos son los totales.",
+    "failingCount": "{failing} de {sample}",
+    "failingLabel": "páginas principales no pasan las pruebas básicas de accesibilidad: tienen al menos un problema crítico o grave.",
+    "passing": "Los otros {passing} pasaron todas las pruebas automáticas que corrimos.",
+    "topHeading": "Los cinco problemas más comunes",
+    "topIntro": "En orden según cuántas páginas principales tenían cada uno. Dos problemas empatan en el quinto lugar.",
+    "sitesCount": "{sites} de {sample} sitios",
+    "methodHeading": "Cómo lo medimos",
+    "methodRows": {
+      "sampleLabel": "Muestra",
+      "sample": "{sample} páginas principales de pequeños negocios de Puerto Rico que tienen su propio sitio web, escogidos de directorios públicos de negocios y de nuestra propia lista de investigación. {food} de los {sample} son restaurantes, cafés o barras, porque es casi todo lo que listan los directorios. Otros {replaced} sitios listados no cargaron o bloquearon las pruebas automáticas; los saltamos y tomamos el próximo de la lista.",
+      "dateLabel": "Fecha",
+      "date": "{date}",
+      "checkedLabel": "Qué revisamos",
+      "checked": "Las reglas WCAG 2.1 A y AA de axe-core {axeVersion}, en un navegador de escritorio.",
+      "scopeLabel": "Páginas",
+      "scope": "Solo la página principal, una prueba por sitio."
+    },
+    "methodLimits": "Las pruebas automáticas solo encuentran una parte de lo que le estorba a la gente. Una persona que prueba con teclado y lector de pantalla casi siempre encuentra más, así que estos números son el mínimo.",
+    "privacy": "No nombramos a ningún negocio. Esta página solo muestra totales.",
+    "cta": "Revisa tu propio sitio →",
+    "problems": {
+      "lowContrast": {
+        "name": "Texto muy claro para leerse",
+        "why": "Gris claro sobre blanco, o blanco sobre un color vivo. Cuesta leerlo al sol y para la vista de personas mayores."
+      },
+      "emptyLinks": {
+        "name": "Enlaces sin nombre",
+        "why": "Enlaces en el logo, en fotos o en íconos de redes sociales que un lector de pantalla solo puede anunciar como \"enlace\"."
+      },
+      "frameTitles": {
+        "name": "Mapas, videos y feeds incrustados sin título",
+        "why": "El lector de pantalla anuncia un mapa de Google, un video o un feed de Facebook solo como \"marco\", sin decir qué contiene."
+      },
+      "imageAlt": {
+        "name": "Imágenes sin descripción",
+        "why": "Una persona ciega no oye nada, o solo el nombre del archivo, donde va la foto de la comida o del producto."
+      },
+      "formLabels": {
+        "name": "Campos de formulario sin etiqueta",
+        "why": "El lector de pantalla solo dice \"editar texto\", y la persona no sabe qué escribir en el formulario de contacto o reservas."
+      },
+      "emptyButtons": {
+        "name": "Botones sin nombre",
+        "why": "Botones de menú, carrito o cerrar que el lector de pantalla anuncia solo como \"botón\", sin decir qué hacen."
+      }
+    }
   }
 }
