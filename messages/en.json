@@ -285,5 +285,60 @@
     "ctaSimilar": "Start a similar project →",
     "otherWork": "Other work",
     "readCaseStudy": "Read case study →"
+  },
+  "study": {
+    "skip": "Skip to content",
+    "breadcrumbLabel": "Breadcrumb",
+    "breadcrumbHome": "Home",
+    "breadcrumbStudy": "Accessibility study",
+    "eyebrow": "Research, {date}",
+    "title": "How Puerto Rico small business websites do on basic accessibility",
+    "dek": "We ran the same automated check on the home pages of {sample} Puerto Rico small businesses. These are the totals.",
+    "failingCount": "{failing} of {sample}",
+    "failingLabel": "home pages fail basic accessibility checks, with at least one problem rated critical or serious.",
+    "passing": "The other {passing} passed every automated check we ran.",
+    "topHeading": "The five most common problems",
+    "topIntro": "Ranked by how many home pages had each one. Two problems tie for fifth place.",
+    "sitesCount": "{sites} of {sample} sites",
+    "methodHeading": "How we checked",
+    "methodRows": {
+      "sampleLabel": "Sample",
+      "sample": "{sample} home pages of Puerto Rico small businesses that have their own website, picked from public business directories and our own research list. {food} of the {sample} are restaurants, cafés or bars, because that is most of what the directories list. {replaced} more listed websites did not load or blocked automated checks; we skipped them and took the next site on the list.",
+      "dateLabel": "Date",
+      "date": "{date}",
+      "checkedLabel": "What we checked",
+      "checked": "The WCAG 2.1 A and AA rules in axe-core {axeVersion}, run in a desktop browser.",
+      "scopeLabel": "Pages",
+      "scope": "Home page only, one scan per site."
+    },
+    "methodLimits": "Automated checks catch only part of what blocks people. A person testing with a keyboard and a screen reader usually finds more, so these numbers are a floor, not a ceiling.",
+    "privacy": "We do not name any business. This page shows totals only.",
+    "cta": "Check your own site →",
+    "problems": {
+      "lowContrast": {
+        "name": "Text too faint to read",
+        "why": "Light gray on white, or white on a bright color. Hard to read in the sun and for older eyes."
+      },
+      "emptyLinks": {
+        "name": "Links with no name",
+        "why": "Logo, photo and social media icon links that a screen reader can only announce as \"link\"."
+      },
+      "frameTitles": {
+        "name": "Embedded maps, videos and feeds with no title",
+        "why": "A screen reader announces a Google map, a video or a Facebook feed only as \"frame\", with no hint of what is inside."
+      },
+      "imageAlt": {
+        "name": "Images with no description",
+        "why": "A blind visitor hears nothing, or a file name, where the photo of the food or the product should be."
+      },
+      "formLabels": {
+        "name": "Form fields with no label",
+        "why": "The screen reader says only \"edit text\", so the visitor does not know what to type in the contact or booking form."
+      },
+      "emptyButtons": {
+        "name": "Buttons with no name",
+        "why": "Menu, cart or close buttons that a screen reader announces only as \"button\", so nobody knows what they do."
+      }
+    }
   }
 }

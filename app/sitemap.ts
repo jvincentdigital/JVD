@@ -17,5 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    ...(['en', 'es'] as const).map((locale) => ({
+      url: `${siteUrl}/${locale}/pr-accessibility-study`,
+      lastModified: new Date('2026-11-12'),
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    })),
   ];
 }
