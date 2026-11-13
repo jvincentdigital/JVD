@@ -291,5 +291,144 @@
     "ctaSimilar": "Empieza un proyecto similar →",
     "otherWork": "Otros proyectos",
     "readCaseStudy": "Leer caso de estudio →"
+  },
+  "checker": {
+    "metaTitle": "Prueba gratis la accesibilidad de tu sitio web",
+    "metaDescription": "Pega la dirección de tu sitio web y recibe en segundos una prueba de accesibilidad rápida y honesta. Gratis, en español e inglés.",
+    "skip": "Saltar al contenido",
+    "breadcrumbLabel": "Ruta de navegación",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbTool": "Prueba de accesibilidad gratis",
+    "title": "Prueba gratis la accesibilidad de tu sitio web",
+    "dek": "Pega la dirección de tu sitio web. En pocos segundos recibes una lista corta y honesta de problemas que pueden impedir que la gente use tu sitio.",
+    "form": {
+      "label": "Dirección de tu sitio web",
+      "placeholder": "tusitio.com",
+      "hint": "Revisamos solo la página que escribas. No la guardamos.",
+      "submit": "Revisar mi sitio",
+      "loading": "Revisando...",
+      "checking": "Revisando la página. Esto suele tardar menos de 15 segundos."
+    },
+    "errors": {
+      "invalid_url": "Eso no parece una dirección de sitio web. Prueba algo como tusitio.com.",
+      "blocked": "Solo podemos revisar sitios web públicos.",
+      "unreachable": "No pudimos abrir esa página. Revisa la dirección. Algunos sitios también bloquean las revisiones automáticas.",
+      "timeout": "El sitio tardó demasiado en responder. Inténtalo de nuevo en un minuto.",
+      "too_large": "Esa página es demasiado grande para la prueba rápida.",
+      "not_html": "Esa dirección no es una página web. Puede ser un archivo o una imagen.",
+      "rate_limited": "Ya hiciste varias pruebas. Espera 10 minutos e inténtalo de nuevo.",
+      "scan_failed": "Algo falló de nuestro lado. Inténtalo de nuevo."
+    },
+    "result": {
+      "heading": "Prueba rápida de {host}",
+      "none": "La prueba rápida no encontró problemas en esta página. Es un buen comienzo, pero una prueba rápida no lo ve todo. Mira la lista más abajo.",
+      "found": "Encontramos {problems, plural, one {# tipo de problema} other {# tipos de problemas}} en {places, plural, one {# lugar} other {# lugares}} de esta página.",
+      "byImpactHeading": "Problemas según cuánto estorban",
+      "problems": "{count, plural, =0 {Ninguno} one {# problema} other {# problemas}}",
+      "places": "{count, plural, one {# lugar} other {# lugares}}",
+      "topHeading": "{count, plural, one {El problema que debes arreglar primero} other {Los # problemas que debes arreglar primero}}",
+      "thin": "Esta página tiene muy poco texto en su código. Si llena su contenido con JavaScript después de cargar, la prueba rápida no pudo ver esa parte, así que la lista real puede ser más larga.",
+      "again": "Revisar otra página"
+    },
+    "impact": {
+      "critical": {
+        "name": "Crítico",
+        "help": "Puede impedir del todo que algunas personas usen la página"
+      },
+      "serious": {
+        "name": "Serio",
+        "help": "Hace la página muy difícil de usar para algunas personas"
+      },
+      "moderate": {
+        "name": "Moderado",
+        "help": "Estorba y hace a la gente ir más lento"
+      },
+      "minor": {
+        "name": "Menor",
+        "help": "Arreglos pequeños"
+      }
+    },
+    "note": {
+      "heading": "Esta es una prueba rápida, no una auditoría completa",
+      "body": "Lee el código de la página como lo hace un buscador, antes de que corra cualquier script. Las pruebas automáticas encuentran solo una parte de los problemas. Una auditoría completa prueba el resto a mano.",
+      "cannotHeading": "Lo que la prueba rápida no puede ver",
+      "cannot": [
+        "El contraste de color, como texto demasiado claro para leerse",
+        "Cómo se ve y funciona la página en un celular",
+        "Usar la página solo con el teclado",
+        "Cómo un lector de pantalla lee la página en voz alta",
+        "Contenido que JavaScript añade después de cargar la página",
+        "Otras páginas, áreas con login y el proceso de pago"
+      ]
+    },
+    "lead": {
+      "heading": "¿Quieres la auditoría completa?",
+      "body": "Deja tu correo y John Vincent Digital te contactará sobre una auditoría de accesibilidad completa de tu sitio, revisada a mano, en español o inglés.",
+      "bodyAfterError": "Todavía podemos revisarlo a mano. Deja tu correo y John Vincent Digital te contactará sobre una auditoría de accesibilidad completa.",
+      "website": "Sitio web",
+      "email": "Tu correo electrónico",
+      "emailError": "Por favor ingresa un correo electrónico válido",
+      "websiteError": "Por favor ingresa tu sitio web",
+      "requiredNote": "Los campos marcados con * son obligatorios",
+      "submit": "Quiero la auditoría completa",
+      "loading": "Enviando...",
+      "successHeading": "Gracias",
+      "success": "Lo recibimos. John Vincent Digital te escribirá pronto sobre tu sitio.",
+      "reset": "Enviar otro",
+      "error": "No pudimos enviarlo. Inténtalo de nuevo o escríbenos por WhatsApp.",
+      "privacy": "Usamos tu correo solo para responderte sobre tu sitio. Sin boletines y sin compartirlo.",
+      "honeypot": "Deja este campo vacío"
+    },
+    "rules": {
+      "image-alt": "Las imágenes no tienen descripción en texto, así que quien usa lector de pantalla no sabe qué muestran.",
+      "input-image-alt": "Los botones de imagen no tienen texto, así que un lector de pantalla no puede decir qué hacen.",
+      "role-img-alt": "Algunos elementos funcionan como imágenes pero no tienen descripción en texto.",
+      "svg-img-alt": "Íconos o gráficas marcados como imágenes no tienen descripción en texto.",
+      "area-alt": "Las áreas que se pueden tocar en un mapa de imagen no tienen texto, así que no se sabe a dónde llevan.",
+      "object-alt": "Los objetos incrustados no tienen descripción en texto.",
+      "link-name": "Algunos enlaces no tienen palabras que un lector de pantalla pueda leer, así que no se sabe a dónde llevan.",
+      "button-name": "Algunos botones no tienen nombre, así que quien no los ve no sabe qué hacen.",
+      "input-button-name": "Algunos botones de formulario no tienen texto, así que no se sabe para qué son.",
+      "label": "Los campos del formulario no tienen etiqueta, así que la gente no sabe qué escribir.",
+      "select-name": "Los menús desplegables no tienen etiqueta, así que no se sabe qué se está escogiendo.",
+      "form-field-multiple-labels": "Algunos campos del formulario tienen más de una etiqueta, lo que confunde a los lectores de pantalla.",
+      "label-content-name-mismatch": "Algunos botones o enlaces tienen un nombre oculto que no coincide con lo que dice la pantalla, y eso rompe el control por voz.",
+      "frame-title": "Los mapas, videos o feeds incrustados no tienen título, así que no se sabe qué son.",
+      "frame-title-unique": "Varios elementos incrustados tienen el mismo título, así que no se pueden distinguir.",
+      "frame-focusable-content": "No se puede llegar al contenido incrustado con el teclado.",
+      "document-title": "La página no tiene título, así que las pestañas y los resultados de búsqueda no muestran un nombre claro.",
+      "html-has-lang": "La página no dice en qué idioma está, así que los lectores de pantalla pueden leerla con el acento equivocado.",
+      "html-lang-valid": "El código de idioma de la página no es válido, así que los lectores de pantalla pueden leerla mal.",
+      "valid-lang": "Algunas partes de la página tienen un código de idioma que no es válido.",
+      "html-xml-lang-mismatch": "La página declara dos idiomas distintos que no coinciden.",
+      "meta-viewport": "La página no deja hacer zoom en el celular, así que quien ve poco no puede agrandar el texto.",
+      "meta-refresh": "La página se recarga o cambia sola, y puede cortar a la gente a mitad de la lectura.",
+      "list": "Algunas listas están mal armadas, así que los lectores de pantalla no pueden contarlas ni recorrerlas.",
+      "listitem": "Algunos elementos de lista están fuera de una lista, lo que confunde a los lectores de pantalla.",
+      "definition-list": "Algunas listas de definiciones están mal armadas, lo que confunde a los lectores de pantalla.",
+      "dlitem": "Algunos términos de definición están fuera de su lista, lo que confunde a los lectores de pantalla.",
+      "duplicate-id-aria": "Dos o más elementos comparten un ID que usan las etiquetas, así que se puede leer la etiqueta equivocada.",
+      "nested-interactive": "Algunos elementos que se pueden tocar están dentro de otros, y el teclado y los lectores de pantalla se traban.",
+      "bypass": "No hay forma de saltar el menú, así que quien usa teclado tiene que recorrerlo en cada página.",
+      "autocomplete-valid": "Algunos campos usan mal las pistas de autocompletar, así que el celular no los puede llenar por la persona.",
+      "blink": "Algún texto parpadea, lo que es difícil de leer y distrae.",
+      "marquee": "Algún texto se mueve solo, y mucha gente no alcanza a leerlo.",
+      "server-side-image-map": "Un mapa de imagen solo funciona con el ratón.",
+      "video-caption": "Los videos no tienen subtítulos, así que las personas sordas o con pérdida auditiva no entienden lo que se dice.",
+      "audio-caption": "El audio no tiene versión en texto, así que las personas sordas no entienden lo que se dice.",
+      "no-autoplay-audio": "Suena audio solo, y eso tapa a los lectores de pantalla.",
+      "td-headers-attr": "Algunas celdas de tabla apuntan a encabezados que no existen.",
+      "td-has-header": "Las tablas grandes tienen celdas sin encabezado, así que un lector de pantalla no puede decir qué significa cada número.",
+      "th-has-data-cells": "Algunos encabezados de tabla no nombran ninguna celda.",
+      "table-fake-caption": "Una tabla usa una celda normal como título en vez de un título de verdad.",
+      "p-as-heading": "Algún texto parece un título pero no está marcado como tal, así que los lectores de pantalla lo saltan.",
+      "summary-name": "Algunas secciones que se abren y cierran no tienen nombre.",
+      "avoid-inline-spacing": "El espaciado del texto está fijo, así que la gente no lo puede ajustar para leer mejor.",
+      "css-orientation-lock": "La página solo funciona en una dirección de pantalla en celulares y tabletas.",
+      "aria-hidden-body": "Toda la página está escondida para los lectores de pantalla.",
+      "aria-hidden-focus": "Algunos elementos escondidos todavía se alcanzan con el teclado, lo que confunde a la gente.",
+      "aria": "Algunas etiquetas de accesibilidad en el código están mal usadas, así que los lectores de pantalla pueden anunciar algo equivocado.",
+      "other": "Otro problema que hace la página más difícil de usar para personas con discapacidades."
+    }
   }
 }

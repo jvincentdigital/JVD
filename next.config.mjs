@@ -44,6 +44,11 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // The free accessibility checker runs these in a server function; bundling
+    // breaks jsdom's file reads, so Node loads them from node_modules instead.
+    serverComponentsExternalPackages: ['jsdom', 'axe-core'],
+  },
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

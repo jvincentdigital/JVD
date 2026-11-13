@@ -285,5 +285,144 @@
     "ctaSimilar": "Start a similar project →",
     "otherWork": "Other work",
     "readCaseStudy": "Read case study →"
+  },
+  "checker": {
+    "metaTitle": "Free website accessibility check",
+    "metaDescription": "Paste your website address and get a quick, honest accessibility check in seconds. Free, in English and Spanish.",
+    "skip": "Skip to content",
+    "breadcrumbLabel": "Breadcrumb",
+    "breadcrumbHome": "Home",
+    "breadcrumbTool": "Free accessibility check",
+    "title": "Free website accessibility check",
+    "dek": "Paste your website address. In a few seconds you get a short, honest list of problems that can stop people from using your site.",
+    "form": {
+      "label": "Your website address",
+      "placeholder": "yoursite.com",
+      "hint": "We check the one page you type. We do not save it.",
+      "submit": "Check my site",
+      "loading": "Checking...",
+      "checking": "Checking the page. This usually takes under 15 seconds."
+    },
+    "errors": {
+      "invalid_url": "That does not look like a website address. Try something like yoursite.com.",
+      "blocked": "We can only check public websites.",
+      "unreachable": "We could not open that page. Check the address. Some sites also block automatic checks.",
+      "timeout": "The site took too long to answer. Please try again in a minute.",
+      "too_large": "That page is too big for the quick check.",
+      "not_html": "That address is not a web page. It may be a file or an image.",
+      "rate_limited": "You have run a few checks already. Please wait 10 minutes and try again.",
+      "scan_failed": "Something went wrong on our side. Please try again."
+    },
+    "result": {
+      "heading": "Quick check for {host}",
+      "none": "The quick check found no problems on this page. That is a good start, but a quick check cannot see everything. See the list below.",
+      "found": "We found {problems, plural, one {# kind of problem} other {# kinds of problems}} in {places, plural, one {# place} other {# places}} on this page.",
+      "byImpactHeading": "Problems by how much they get in the way",
+      "problems": "{count, plural, =0 {None} one {# problem} other {# problems}}",
+      "places": "{count, plural, one {# place} other {# places}}",
+      "topHeading": "{count, plural, one {The problem to fix first} other {The # problems to fix first}}",
+      "thin": "This page has very little text in its code. If it fills in its content with JavaScript after it loads, the quick check could not see that part, so the real list may be longer.",
+      "again": "Check another page"
+    },
+    "impact": {
+      "critical": {
+        "name": "Critical",
+        "help": "Can stop some people from using the page at all"
+      },
+      "serious": {
+        "name": "Serious",
+        "help": "Makes the page very hard to use for some people"
+      },
+      "moderate": {
+        "name": "Moderate",
+        "help": "Gets in the way and slows people down"
+      },
+      "minor": {
+        "name": "Minor",
+        "help": "Small fixes"
+      }
+    },
+    "note": {
+      "heading": "This is a quick check, not a full audit",
+      "body": "It reads the page code the way a search engine does, before any scripts run. Automated checks find only part of the problems. A full audit tests the rest by hand.",
+      "cannotHeading": "What the quick check cannot see",
+      "cannot": [
+        "Color contrast, like text too faint to read",
+        "How the page looks and works on a phone",
+        "Using the page with only a keyboard",
+        "How a screen reader reads the page out loud",
+        "Content added by JavaScript after the page loads",
+        "Other pages, logins and checkout"
+      ]
+    },
+    "lead": {
+      "heading": "Want the full audit?",
+      "body": "Leave your email and John Vincent Digital will contact you about a full accessibility audit of your site, checked by hand, in English or Spanish.",
+      "bodyAfterError": "We can still check it by hand. Leave your email and John Vincent Digital will contact you about a full accessibility audit.",
+      "website": "Website",
+      "email": "Your email",
+      "emailError": "Please enter a valid email",
+      "websiteError": "Please enter your website",
+      "requiredNote": "Fields marked with * are required",
+      "submit": "Get the full audit",
+      "loading": "Sending...",
+      "successHeading": "Thank you",
+      "success": "We got it. John Vincent Digital will email you about your site soon.",
+      "reset": "Send another",
+      "error": "We could not send it. Please try again, or write to us on WhatsApp.",
+      "privacy": "We use your email only to reply about your site. No newsletter, no sharing.",
+      "honeypot": "Leave this field empty"
+    },
+    "rules": {
+      "image-alt": "Images have no text description, so people who use a screen reader do not know what they show.",
+      "input-image-alt": "Image buttons have no text, so a screen reader cannot say what they do.",
+      "role-img-alt": "Some elements act as images but have no text description.",
+      "svg-img-alt": "Icons or graphics marked as images have no text description.",
+      "area-alt": "Clickable areas on an image map have no text, so people cannot tell where they go.",
+      "object-alt": "Embedded objects have no text description.",
+      "link-name": "Some links have no words a screen reader can read, so people cannot tell where they go.",
+      "button-name": "Some buttons have no name, so people who cannot see them do not know what they do.",
+      "input-button-name": "Some form buttons have no text, so their purpose is unclear.",
+      "label": "Form fields have no label, so people do not know what to type in them.",
+      "select-name": "Dropdown menus have no label, so people do not know what they are choosing.",
+      "form-field-multiple-labels": "Some form fields have more than one label, which confuses screen readers.",
+      "label-content-name-mismatch": "Some buttons or links have a hidden name that does not match the words on screen, which breaks voice control.",
+      "frame-title": "Embedded maps, videos or feeds have no title, so people cannot tell what they are.",
+      "frame-title-unique": "Several embedded frames share the same title, so people cannot tell them apart.",
+      "frame-focusable-content": "Embedded content cannot be reached with the keyboard.",
+      "document-title": "The page has no title, so browser tabs and search results show no clear name.",
+      "html-has-lang": "The page does not say what language it is in, so screen readers may read it with the wrong accent.",
+      "html-lang-valid": "The page's language code is not valid, so screen readers may read it wrong.",
+      "valid-lang": "Some parts of the page have a language code that is not valid.",
+      "html-xml-lang-mismatch": "The page declares two different languages that do not match.",
+      "meta-viewport": "The page blocks zooming on phones, so people with low vision cannot make text bigger.",
+      "meta-refresh": "The page reloads or moves on by itself, which can cut people off mid-read.",
+      "list": "Some lists are built wrong, so screen readers cannot count or move through them.",
+      "listitem": "Some list items are outside a list, which confuses screen readers.",
+      "definition-list": "Some definition lists are built wrong, which confuses screen readers.",
+      "dlitem": "Some definition terms are outside their list, which confuses screen readers.",
+      "duplicate-id-aria": "Two or more elements share an ID that labels use, so the wrong label can be read.",
+      "nested-interactive": "Some clickable items sit inside other clickable items, so keyboards and screen readers get stuck.",
+      "bypass": "There is no way to skip past the menu, so keyboard users must tab through it on every page.",
+      "autocomplete-valid": "Some form fields use autofill hints wrong, so phones cannot fill them in for people.",
+      "blink": "Some text blinks, which is hard to read and can be distracting.",
+      "marquee": "Some text scrolls by itself, which many people cannot read in time.",
+      "server-side-image-map": "An image map only works with a mouse.",
+      "video-caption": "Videos have no captions, so people who are deaf or hard of hearing miss what is said.",
+      "audio-caption": "Audio has no text version, so people who are deaf miss what is said.",
+      "no-autoplay-audio": "Sound plays by itself, which drowns out screen readers.",
+      "td-headers-attr": "Some table cells point to headers that do not exist.",
+      "td-has-header": "Large tables have cells with no header, so screen readers cannot say what each number means.",
+      "th-has-data-cells": "Some table headers do not label any cells.",
+      "table-fake-caption": "A table uses a regular cell as its title instead of a real caption.",
+      "p-as-heading": "Some text looks like a heading but is not marked as one, so screen readers skip it.",
+      "summary-name": "Some expandable sections have no name.",
+      "avoid-inline-spacing": "Text spacing is locked, so people cannot adjust it to read more easily.",
+      "css-orientation-lock": "The page only works in one screen direction on phones and tablets.",
+      "aria-hidden-body": "The whole page is hidden from screen readers.",
+      "aria-hidden-focus": "Some hidden items can still be reached with the keyboard, which confuses people.",
+      "aria": "Some accessibility labels in the code are used wrong, so screen readers may announce the wrong thing.",
+      "other": "Another problem that makes the page harder to use for people with disabilities."
+    }
   }
 }
