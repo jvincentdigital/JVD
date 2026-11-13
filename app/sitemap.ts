@@ -17,5 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    ...(['en', 'es'] as const).map((locale) => ({
+      url: `${siteUrl}/${locale}/free-accessibility-check`,
+      lastModified: new Date('2026-11-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
   ];
 }

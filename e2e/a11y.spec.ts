@@ -5,6 +5,8 @@ const pages = [
   { path: '/en', name: 'home (en)' },
   { path: '/es', name: 'home (es)' },
   { path: '/en/work/imperfect-gaming', name: 'case study (en)' },
+  { path: '/en/free-accessibility-check', name: 'free accessibility check (en)' },
+  { path: '/es/free-accessibility-check', name: 'free accessibility check (es)' },
   { path: '/en/totally-fake', name: '404 (en)' },
   { path: '/es/work/does-not-exist', name: '404 case study (es)' },
 ];
