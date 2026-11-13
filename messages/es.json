@@ -315,20 +315,21 @@
       "unreachable": "No pudimos abrir esa página. Revisa la dirección. Algunos sitios también bloquean las revisiones automáticas.",
       "timeout": "El sitio tardó demasiado en responder. Inténtalo de nuevo en un minuto.",
       "too_large": "Esa página es demasiado grande para la prueba rápida.",
+      "too_complex": "Esta página es demasiado grande para la prueba rápida. Una auditoría completa puede revisarla a mano.",
       "not_html": "Esa dirección no es una página web. Puede ser un archivo o una imagen.",
       "rate_limited": "Ya hiciste varias pruebas. Espera 10 minutos e inténtalo de nuevo.",
+      "busy": "La prueba rápida está ocupada ahora mismo. Inténtalo de nuevo en unos minutos.",
       "scan_failed": "Algo falló de nuestro lado. Inténtalo de nuevo."
     },
     "result": {
-      "heading": "Prueba rápida de {host}",
+      "heading": "Prueba rápida de {page}",
       "none": "La prueba rápida no encontró problemas en esta página. Es un buen comienzo, pero una prueba rápida no lo ve todo. Mira la lista más abajo.",
       "found": "Encontramos {problems, plural, one {# tipo de problema} other {# tipos de problemas}} en {places, plural, one {# lugar} other {# lugares}} de esta página.",
       "byImpactHeading": "Problemas según cuánto estorban",
       "problems": "{count, plural, =0 {Ninguno} one {# problema} other {# problemas}}",
       "places": "{count, plural, one {# lugar} other {# lugares}}",
       "topHeading": "{count, plural, one {El problema que debes arreglar primero} other {Los # problemas que debes arreglar primero}}",
-      "thin": "Esta página tiene muy poco texto en su código. Si llena su contenido con JavaScript después de cargar, la prueba rápida no pudo ver esa parte, así que la lista real puede ser más larga.",
-      "again": "Revisar otra página"
+      "thin": "Esta página tiene muy poco texto en su código. Si llena su contenido con JavaScript después de cargar, la prueba rápida no pudo ver esa parte, así que la lista real puede ser más larga."
     },
     "impact": {
       "critical": {
@@ -336,12 +337,12 @@
         "help": "Puede impedir del todo que algunas personas usen la página"
       },
       "serious": {
-        "name": "Serio",
+        "name": "Grave",
         "help": "Hace la página muy difícil de usar para algunas personas"
       },
       "moderate": {
         "name": "Moderado",
-        "help": "Estorba y hace a la gente ir más lento"
+        "help": "Estorba y hace que la gente vaya más lento"
       },
       "minor": {
         "name": "Menor",
@@ -350,7 +351,7 @@
     },
     "note": {
       "heading": "Esta es una prueba rápida, no una auditoría completa",
-      "body": "Lee el código de la página como lo hace un buscador, antes de que corra cualquier script. Las pruebas automáticas encuentran solo una parte de los problemas. Una auditoría completa prueba el resto a mano.",
+      "body": "Lee el código de la página tal como lo envía tu servidor, antes de que corra cualquier script. Las pruebas automáticas encuentran solo una parte de los problemas. Una auditoría completa prueba el resto a mano.",
       "cannotHeading": "Lo que la prueba rápida no puede ver",
       "cannot": [
         "El contraste de color, como texto demasiado claro para leerse",
@@ -376,24 +377,24 @@
       "success": "Lo recibimos. John Vincent Digital te escribirá pronto sobre tu sitio.",
       "reset": "Enviar otro",
       "error": "No pudimos enviarlo. Inténtalo de nuevo o escríbenos por WhatsApp.",
-      "privacy": "Usamos tu correo solo para responderte sobre tu sitio. Sin boletines y sin compartirlo.",
+      "privacy": "Usamos tu correo solo para responderte sobre tu sitio. Se envía por nuestro servicio de formularios, Formspree. Sin boletines y sin compartirlo.",
       "honeypot": "Deja este campo vacío"
     },
     "rules": {
-      "image-alt": "Las imágenes no tienen descripción en texto, así que quien usa lector de pantalla no sabe qué muestran.",
-      "input-image-alt": "Los botones de imagen no tienen texto, así que un lector de pantalla no puede decir qué hacen.",
+      "image-alt": "Algunas imágenes no tienen descripción en texto, así que quien usa lector de pantalla no sabe qué muestran.",
+      "input-image-alt": "Algunos botones de imagen no tienen texto, así que un lector de pantalla no puede decir qué hacen.",
       "role-img-alt": "Algunos elementos funcionan como imágenes pero no tienen descripción en texto.",
-      "svg-img-alt": "Íconos o gráficas marcados como imágenes no tienen descripción en texto.",
-      "area-alt": "Las áreas que se pueden tocar en un mapa de imagen no tienen texto, así que no se sabe a dónde llevan.",
-      "object-alt": "Los objetos incrustados no tienen descripción en texto.",
+      "svg-img-alt": "Algunos íconos o gráficas marcados como imágenes no tienen descripción en texto.",
+      "area-alt": "Algunas áreas que se pueden tocar en un mapa de imagen no tienen texto, así que no se sabe a dónde llevan.",
+      "object-alt": "Algunos objetos incrustados no tienen descripción en texto.",
       "link-name": "Algunos enlaces no tienen palabras que un lector de pantalla pueda leer, así que no se sabe a dónde llevan.",
       "button-name": "Algunos botones no tienen nombre, así que quien no los ve no sabe qué hacen.",
       "input-button-name": "Algunos botones de formulario no tienen texto, así que no se sabe para qué son.",
-      "label": "Los campos del formulario no tienen etiqueta, así que la gente no sabe qué escribir.",
-      "select-name": "Los menús desplegables no tienen etiqueta, así que no se sabe qué se está escogiendo.",
+      "label": "Algunos campos del formulario no tienen etiqueta, así que la gente no sabe qué escribir.",
+      "select-name": "Algunos menús desplegables no tienen etiqueta, así que no se sabe qué se está escogiendo.",
       "form-field-multiple-labels": "Algunos campos del formulario tienen más de una etiqueta, lo que confunde a los lectores de pantalla.",
       "label-content-name-mismatch": "Algunos botones o enlaces tienen un nombre oculto que no coincide con lo que dice la pantalla, y eso rompe el control por voz.",
-      "frame-title": "Los mapas, videos o feeds incrustados no tienen título, así que no se sabe qué son.",
+      "frame-title": "Algunos mapas, videos o feeds incrustados no tienen título, así que no se sabe qué son.",
       "frame-title-unique": "Varios elementos incrustados tienen el mismo título, así que no se pueden distinguir.",
       "frame-focusable-content": "No se puede llegar al contenido incrustado con el teclado.",
       "document-title": "La página no tiene título, así que las pestañas y los resultados de búsqueda no muestran un nombre claro.",
@@ -413,12 +414,12 @@
       "autocomplete-valid": "Algunos campos usan mal las pistas de autocompletar, así que el celular no los puede llenar por la persona.",
       "blink": "Algún texto parpadea, lo que es difícil de leer y distrae.",
       "marquee": "Algún texto se mueve solo, y mucha gente no alcanza a leerlo.",
-      "server-side-image-map": "Un mapa de imagen solo funciona con el ratón.",
-      "video-caption": "Los videos no tienen subtítulos, así que las personas sordas o con pérdida auditiva no entienden lo que se dice.",
+      "server-side-image-map": "Un mapa de imagen solo funciona con el mouse.",
+      "video-caption": "Algunos videos no tienen subtítulos, así que las personas sordas o con pérdida auditiva no entienden lo que se dice.",
       "audio-caption": "El audio no tiene versión en texto, así que las personas sordas no entienden lo que se dice.",
       "no-autoplay-audio": "Suena audio solo, y eso tapa a los lectores de pantalla.",
       "td-headers-attr": "Algunas celdas de tabla apuntan a encabezados que no existen.",
-      "td-has-header": "Las tablas grandes tienen celdas sin encabezado, así que un lector de pantalla no puede decir qué significa cada número.",
+      "td-has-header": "Algunas tablas grandes tienen celdas sin encabezado, así que un lector de pantalla no puede decir qué significa cada número.",
       "th-has-data-cells": "Algunos encabezados de tabla no nombran ninguna celda.",
       "table-fake-caption": "Una tabla usa una celda normal como título en vez de un título de verdad.",
       "p-as-heading": "Algún texto parece un título pero no está marcado como tal, así que los lectores de pantalla lo saltan.",

@@ -34,13 +34,18 @@ for (const [net, prefix] of [
   ['::', 128], // unspecified
   ['::1', 128], // loopback
   ['100::', 64], // discard
+  ['2001::', 23], // protocol assignments, includes Teredo 2001::/32
   ['2001:db8::', 32], // documentation
+  ['3fff::', 20], // documentation
   ['fc00::', 7], // unique local, includes AWS metadata fd00:ec2::254
   ['fe80::', 10], // link-local
   ['ff00::', 8], // multicast
 ] as const) {
   blocked.addSubnet(net, prefix, 'ipv6');
 }
+// All public IPv6 lives in 2000::/3. Anything outside it is refused.
+const globalUnicast = new BlockList();
+globalUnicast.addSubnet('2000::', 3, 'ipv6');
 
 /** IPv4 hidden inside an IPv6 address (mapped, NAT64, 6to4), if any. */
 function embeddedIPv4(ip: string): string | null {
@@ -61,10 +66,10 @@ export function isPublicAddress(ip: string): boolean {
   const family = isIP(ip);
   if (family === 4) return !blocked.check(ip, 'ipv4');
   if (family === 6) {
-    if (blocked.check(ip, 'ipv6')) return false;
     const inner = embeddedIPv4(ip);
     // ::ffff:0:0/96 is always a mapped IPv4; anything we cannot read is refused.
-    if (ip.toLowerCase().startsWith('::ffff:') && !inner) return false;
+    if (ip.toLowerCase().startsWith('::ffff:')) return inner ? isPublicAddress(inner) : false;
+    if (!globalUnicast.check(ip, 'ipv6') || blocked.check(ip, 'ipv6')) return false;
     return inner ? isPublicAddress(inner) : true;
   }
   return false;
@@ -79,7 +84,8 @@ const blockedHostSuffixes = ['.localhost', '.local', '.internal', '.lan', '.home
 export function parseTarget(raw: string): URL | GuardError {
   const typed = raw.trim();
   if (!typed || typed.length > MAX_URL_LENGTH) return 'invalid_url';
-  const withScheme = /^[a-z][a-z0-9+.-]*:/i.test(typed) ? typed : `https://${typed}`;
+  // A colon followed by a digit is a port (mysite.com:443), not a scheme.
+  const withScheme = /^[a-z][a-z0-9+.-]*:(?!\d)/i.test(typed) ? typed : `https://${typed}`;
 
   let url: URL;
   try {

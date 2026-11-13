@@ -1,5 +1,5 @@
-import { JSDOM, VirtualConsole } from 'jsdom';
-import axe from 'axe-core';
+import path from 'node:path';
+import { Worker } from 'node:worker_threads';
 import type { RawViolation } from './summary';
 
 // Rules that need a real browser (colors, layout, scrolling). In jsdom they
@@ -11,46 +11,85 @@ export const NEEDS_A_BROWSER = [
   'target-size',
 ];
 
+// Some small pages (many images inside links) make axe in jsdom take close to
+// a minute. These caps keep one check cheap, whatever page it gets.
+export const AXE_LIMITS = {
+  maxTags: 3000, // counted before jsdom starts
+  timeoutMs: 10_000,
+  maxMemoryMb: 512,
+};
+
+/** The page is too heavy for the quick check. */
+export class TooComplex extends Error {
+  constructor() {
+    super('too_complex');
+  }
+}
+
+// Read from disk at run time (not bundled). next.config.mjs traces it for Vercel.
+const WORKER_FILE = path.join(process.cwd(), 'lib/a11y-check/axe-worker.cjs');
+
+// Never true. Next's file tracer only ships the packages this route requires,
+// and only the worker uses these two, so name them here for the Vercel bundle.
+if (process.env.A11Y_TRACE_ONLY === 'never') {
+  require('jsdom');
+  require('axe-core');
+}
+
+/** True when the page has more opening tags than the quick check will take. */
+export function tooManyTags(body: Buffer, max = AXE_LIMITS.maxTags): boolean {
+  const tags = /<[a-z]/gi;
+  const text = body.toString('latin1');
+  let count = 0;
+  while (tags.exec(text)) if (++count > max) return true;
+  return false;
+}
+
+/** Keep the charset the server sent, but always parse as HTML. */
+function htmlContentType(contentType: string): string {
+  const charset = /charset=["']?([\w.:-]+)/i.exec(contentType)?.[1];
+  return charset ? `text/html; charset=${charset}` : 'text/html';
+}
+
 /**
- * Run axe-core on the page HTML as the server sent it. The page's own scripts
- * never run ("outside-only" lets only our axe script run) and jsdom loads no
- * images, styles, frames or other files from the page.
+ * Run axe-core on the page as the server sent it, in a worker thread with a
+ * memory cap and a time limit. The page's own scripts never run
+ * ("outside-only" lets only our axe script run) and jsdom loads no images,
+ * styles, frames or other files from the page.
  */
-export async function runAxe(
-  html: string,
+export function runAxe(
+  body: Buffer,
+  contentType: string,
   url: URL,
 ): Promise<{ violations: RawViolation[]; thin: boolean }> {
-  const dom = new JSDOM(html, {
-    url: url.href,
-    runScripts: 'outside-only',
-    virtualConsole: new VirtualConsole(),
-  });
-  try {
-    const { window } = dom;
-    window.eval(axe.source);
-    const runner = (window as unknown as { axe: typeof axe }).axe;
-    const results = await runner.run(window.document, {
-      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
-      rules: Object.fromEntries(NEEDS_A_BROWSER.map((id) => [id, { enabled: false }])),
-      resultTypes: ['violations'],
+  if (tooManyTags(body)) return Promise.reject(new TooComplex());
+
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(WORKER_FILE, {
+      workerData: {
+        body,
+        contentType: htmlContentType(contentType),
+        url: url.href,
+        rulesOff: NEEDS_A_BROWSER,
+      },
+      resourceLimits: { maxOldGenerationSizeMb: AXE_LIMITS.maxMemoryMb },
     });
-
-    // Pages built in the browser by JavaScript arrive almost empty.
-    const doc = window.document;
-    const hasScripts = doc.querySelector('script:not([type="application/ld+json"])') !== null;
-    doc.querySelectorAll('script, style, noscript, template').forEach((el) => el.remove());
-    const text = (doc.body?.textContent ?? '').replace(/\s+/g, ' ').trim();
-    const thin = hasScripts && text.length < 200;
-
-    return {
-      violations: results.violations.map((v) => ({
-        id: v.id,
-        impact: v.impact ?? null,
-        nodes: v.nodes.length,
-      })),
-      thin,
+    const stop = (err?: Error) => {
+      clearTimeout(timer);
+      void worker.terminate();
+      if (err) reject(err);
     };
-  } finally {
-    dom.window.close();
-  }
+    const timer = setTimeout(() => stop(new TooComplex()), AXE_LIMITS.timeoutMs);
+
+    worker.once('message', (msg: { ok: boolean; violations: RawViolation[]; thin: boolean }) => {
+      stop();
+      if (msg.ok) resolve({ violations: msg.violations, thin: msg.thin });
+      else reject(new Error('scan_failed'));
+    });
+    worker.once('error', (err: NodeJS.ErrnoException) =>
+      stop(err.code === 'ERR_WORKER_OUT_OF_MEMORY' ? new TooComplex() : err),
+    );
+    // Exiting without an answer (a no-op if we already settled).
+    worker.once('exit', () => stop(new Error('scan_failed')));
+  });
 }

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import en from '../messages/en.json';
 import es from '../messages/es.json';
 import { EXPLAINED_RULES, ruleKey, summarize } from '../lib/a11y-check/summary';
-import { createRateLimiter } from '../lib/a11y-check/rate-limit';
+import { clientIp, createRateLimiter } from '../lib/a11y-check/rate-limit';
 
 describe('summarize', () => {
   it('reports nothing for a clean page', () => {
@@ -87,5 +87,22 @@ describe('createRateLimiter', () => {
     expect(allow('1.2.3.4', 20)).toBe(false);
     expect(allow('5.6.7.8', 20)).toBe(true);
     expect(allow('1.2.3.4', 1011)).toBe(true);
+  });
+});
+
+describe('clientIp', () => {
+  const ip = (value: string) => clientIp(new Headers({ 'x-forwarded-for': value }));
+
+  it('keeps an IPv4 address as it is', () => {
+    expect(ip('203.0.114.7, 10.0.0.1')).toBe('203.0.114.7');
+  });
+
+  it('puts every address in one IPv6 /64 under one key', () => {
+    const key = '2600:1700:abcd:12::/64';
+    expect(ip('2600:1700:abcd:12::1')).toBe(key);
+    expect(ip('2600:1700:abcd:0012:9f3e:1:2:3')).toBe(key);
+    expect(ip('2600:1700:abcd:12:ffff::')).toBe(key);
+    expect(ip('2600:1700:abcd:13::1')).not.toBe(key);
+    expect(ip('2600::1')).toBe('2600:0:0:0::/64');
   });
 });

@@ -47,7 +47,8 @@ describe('fetchPage', () => {
   it('returns the HTML of a normal page', async () => {
     queue.push({ status: 200, headers: { 'content-type': 'text/html' }, body: '<h1>Hi</h1>' });
     const page = await fetchPage(new URL('https://site.example/'));
-    expect(page.html).toBe('<h1>Hi</h1>');
+    expect(page.body.toString()).toBe('<h1>Hi</h1>');
+    expect(page.contentType).toBe('text/html');
   });
 
   it('follows a redirect to another public page', async () => {
@@ -96,6 +97,15 @@ describe('fetchPage', () => {
       body: 'a'.repeat(FETCH_LIMITS.maxBytes + 10),
     });
     expect(await codeOf('https://site.example/')).toBe('too_large');
+  });
+
+  it('refuses an encoding it cannot read', async () => {
+    queue.push({
+      status: 200,
+      headers: { 'content-type': 'text/html', 'content-encoding': 'gzip, gzip' },
+      body: 'junk',
+    });
+    expect(await codeOf('https://site.example/')).toBe('unreachable');
   });
 
   it('treats error pages as unreachable', async () => {

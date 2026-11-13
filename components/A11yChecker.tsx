@@ -9,14 +9,21 @@ import { IMPACTS, ruleKey, type Summary } from '@/lib/a11y-check/summary';
 // Same spam guard as the main contact form: people need a few seconds to type.
 export const MIN_FILL_MS = 3000;
 
-const LEAD_AFTER_ERROR = ['unreachable', 'timeout', 'too_large', 'not_html', 'scan_failed'];
-const ERROR_CODES = [...LEAD_AFTER_ERROR, 'invalid_url', 'blocked', 'rate_limited'];
+const LEAD_AFTER_ERROR = [
+  'unreachable',
+  'timeout',
+  'too_large',
+  'too_complex',
+  'not_html',
+  'scan_failed',
+];
+const ERROR_CODES = [...LEAD_AFTER_ERROR, 'invalid_url', 'blocked', 'rate_limited', 'busy'];
 
 type State =
   | { kind: 'idle' }
   | { kind: 'checking' }
   | { kind: 'error'; code: string; typed: string }
-  | { kind: 'result'; host: string; typed: string; thin: boolean; summary: Summary };
+  | { kind: 'result'; page: string; typed: string; thin: boolean; summary: Summary };
 
 export default function A11yChecker() {
   const t = useTranslations('checker');
@@ -44,7 +51,7 @@ export default function A11yChecker() {
       if (data.ok) {
         setState({
           kind: 'result',
-          host: data.host,
+          page: data.page,
           typed,
           thin: data.thin,
           summary: data.summary,
@@ -124,7 +131,7 @@ export default function A11yChecker() {
       {state.kind === 'result' && (
         <Result
           headingRef={resultRef}
-          host={state.host}
+          page={state.page}
           thin={state.thin}
           summary={state.summary}
         />
@@ -139,6 +146,7 @@ export default function A11yChecker() {
           locale={locale}
           afterError={state.kind === 'error'}
           summary={state.kind === 'result' ? state.summary : null}
+          page={state.kind === 'result' ? state.page : null}
         />
       )}
     </div>
@@ -146,12 +154,12 @@ export default function A11yChecker() {
 }
 
 function Result({
-  host,
+  page,
   thin,
   summary,
   headingRef,
 }: {
-  host: string;
+  page: string;
   thin: boolean;
   summary: Summary;
   headingRef: React.RefObject<HTMLHeadingElement>;
@@ -168,7 +176,7 @@ function Result({
         tabIndex={-1}
         className='break-words font-serif text-2xl font-bold text-charcoal sm:text-3xl'
       >
-        {t('result.heading', { host })}
+        {t('result.heading', { page })}
       </h2>
       <p className='mt-3 text-lg leading-relaxed text-charcoal'>
         {summary.problems === 0
@@ -262,11 +270,13 @@ function LeadForm({
   locale,
   afterError,
   summary,
+  page,
 }: {
   website: string;
   locale: string;
   afterError: boolean;
   summary: Summary | null;
+  page: string | null;
 }) {
   const t = useTranslations('checker');
   const shownAt = useRef(0);
@@ -307,7 +317,7 @@ function LeadForm({
     // contact form. The email never passes through our server or its logs.
     const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? 'xrerbdlw';
     const found = summary
-      ? `${summary.problems} kinds of problems in ${summary.places} places. Top: ${summary.top.map((p) => p.rule).join(', ') || 'none'}.`
+      ? `Checked ${page}: ${summary.problems} kinds of problems in ${summary.places} places. Top: ${summary.top.map((p) => p.rule).join(', ') || 'none'}.`
       : 'The quick check could not open the page.';
     const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
       method: 'POST',

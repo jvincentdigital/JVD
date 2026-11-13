@@ -21,7 +21,9 @@ class Stop extends Error {
   }
 }
 
-type Hop = { kind: 'redirect'; location: string } | { kind: 'page'; html: string };
+type Hop =
+  | { kind: 'redirect'; location: string }
+  | { kind: 'page'; body: Buffer; contentType: string };
 
 function requestOnce(url: URL, signal: AbortSignal): Promise<Hop> {
   const lib = url.protocol === 'https:' ? https : http;
@@ -56,8 +58,8 @@ function requestOnce(url: URL, signal: AbortSignal): Promise<Hop> {
         }
         const declared = Number(res.headers['content-length'] ?? 0);
         if (declared > FETCH_LIMITS.maxBytes) {
-          res.destroy();
-          return reject(new Stop('too_large'));
+          reject(new Stop('too_large'));
+          return res.destroy();
         }
 
         // Count bytes after decompression, so a tiny gzip bomb cannot blow up memory.
@@ -66,25 +68,31 @@ function requestOnce(url: URL, signal: AbortSignal): Promise<Hop> {
         if (encoding === 'gzip' || encoding === 'x-gzip') body = res.pipe(zlib.createGunzip());
         else if (encoding === 'deflate') body = res.pipe(zlib.createInflate());
         else if (encoding === 'br') body = res.pipe(zlib.createBrotliDecompress());
+        else if (encoding && encoding !== 'identity') {
+          // Stacked or unknown encodings: we cannot read them, so do not guess.
+          reject(new Stop('unreachable'));
+          return res.destroy();
+        }
 
         const chunks: Buffer[] = [];
         let size = 0;
         body.on('data', (chunk: Buffer) => {
           size += chunk.length;
           if (size > FETCH_LIMITS.maxBytes) {
+            // Reject first: destroying the stream fires the error handlers below.
+            reject(new Stop('too_large'));
             res.destroy();
             body.destroy();
-            reject(new Stop('too_large'));
             return;
           }
           chunks.push(chunk);
         });
+        // Raw bytes plus the content type, so jsdom can pick the right charset.
         body.on('end', () =>
-          resolve({ kind: 'page', html: Buffer.concat(chunks).toString('utf8') }),
+          resolve({ kind: 'page', body: Buffer.concat(chunks), contentType: type }),
         );
         const fail = () => reject(new Stop(signal.aborted ? 'timeout' : 'unreachable'));
         res.on('error', fail);
-        res.on('aborted', fail);
         if (body !== res) body.on('error', fail);
       },
     );
@@ -102,14 +110,17 @@ function requestOnce(url: URL, signal: AbortSignal): Promise<Hop> {
  * Fetch one public HTML page. Every redirect hop goes back through the URL
  * guard and the safe DNS lookup. Nothing is cached or written anywhere.
  */
-export async function fetchPage(start: URL): Promise<{ html: string; finalUrl: URL }> {
+export async function fetchPage(
+  start: URL,
+): Promise<{ body: Buffer; contentType: string; finalUrl: URL }> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_LIMITS.timeoutMs);
   try {
     let url = start;
     for (let hop = 0; hop <= FETCH_LIMITS.maxRedirects; hop++) {
       const result = await requestOnce(url, controller.signal);
-      if (result.kind === 'page') return { html: result.html, finalUrl: url };
+      if (result.kind === 'page')
+        return { body: result.body, contentType: result.contentType, finalUrl: url };
       let next: URL;
       try {
         next = new URL(result.location, url);

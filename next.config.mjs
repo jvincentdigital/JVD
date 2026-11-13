@@ -48,6 +48,10 @@ const nextConfig = {
     // The free accessibility checker runs these in a server function; bundling
     // breaks jsdom's file reads, so Node loads them from node_modules instead.
     serverComponentsExternalPackages: ['jsdom', 'axe-core'],
+    // axe runs in a worker thread loaded from disk, so tell Vercel to ship it.
+    outputFileTracingIncludes: {
+      '/api/a11y-check': ['./lib/a11y-check/axe-worker.cjs'],
+    },
   },
   async headers() {
     return [

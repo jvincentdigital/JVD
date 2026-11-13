@@ -25,6 +25,13 @@ describe('isPublicAddress', () => {
     '::ffff:a9fe:a9fe', // mapped 169.254.169.254
     '64:ff9b::10.0.0.1',
     '2002:c0a8:0101::1', // 6to4 wrapping 192.168.1.1
+    '::7f00:1', // old IPv4-compatible form of 127.0.0.1
+    '64:ff9b:1::1', // local NAT64
+    '2001::1', // Teredo
+    'fec0::1', // old site-local
+    '3fff::1', // documentation
+    '5f00::1', // outside 2000::/3
+    '2001:10::1', // ORCHID
     'not-an-ip',
   ])('refuses %s', (ip) => {
     expect(isPublicAddress(ip)).toBe(false);
@@ -82,6 +89,13 @@ describe('parseTarget', () => {
     expect(parseTarget('http://8.8.8.8')).toBeInstanceOf(URL);
     expect(parseTarget('https://example.com:443/')).toBeInstanceOf(URL);
   });
+
+  it.each(['mysite.com:443', 'www.site.com:443/x', 'mysite.com:80'])(
+    'reads the number after %s as a port, not a scheme',
+    (raw) => {
+      expect(parseTarget(raw)).toBeInstanceOf(URL);
+    },
+  );
 });
 
 describe('createSafeLookup', () => {

@@ -21,8 +21,25 @@ export function createRateLimiter({ limit, windowMs }: { limit: number; windowMs
   };
 }
 
-/** Visitor IP as Vercel reports it. Vercel sets x-forwarded-for itself. */
+/**
+ * Visitor key from the IP Vercel reports (Vercel sets x-forwarded-for itself).
+ * IPv6 visitors are keyed by their /64, since one home or phone line usually
+ * gets a whole /64 and could otherwise pick a new address for every check.
+ */
 export function clientIp(headers: Headers): string {
   const forwarded = headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-  return forwarded || headers.get('x-real-ip') || 'unknown';
+  const ip = forwarded || headers.get('x-real-ip') || 'unknown';
+  if (!ip.includes(':') || ip.includes('.')) return ip;
+  const [head, tail = ''] = ip.toLowerCase().split('%')[0].split('::');
+  const left = head ? head.split(':') : [];
+  const right = ip.includes('::') && tail ? tail.split(':') : [];
+  const groups = [
+    ...left,
+    ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'),
+    ...right,
+  ];
+  return `${groups
+    .slice(0, 4)
+    .map((g) => g.replace(/^0+(?=.)/, ''))
+    .join(':')}::/64`;
 }
