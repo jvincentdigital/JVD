@@ -30,7 +30,9 @@ export default function Work() {
             // With an odd number of projects the last card takes the full row.
             <ScrollReveal
               key={project.key}
-              className={i === projects.length - 1 && projects.length % 2 === 1 ? 'sm:col-span-2' : undefined}
+              className={
+                i === projects.length - 1 && projects.length % 2 === 1 ? 'sm:col-span-2' : undefined
+              }
             >
               <div className='card-lift overflow-hidden rounded-xl border border-border bg-white'>
                 <div className='h-1.5' style={{ backgroundColor: project.color }} />
