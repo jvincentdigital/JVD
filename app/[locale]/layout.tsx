@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { siteUrl } from '@/lib/site';
+import SmoothScroll from '@/components/motion/SmoothScroll';
 import '../globals.css';
 
 const fraunces = Fraunces({
@@ -23,6 +24,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 const locales = ['en', 'es'];
+
+const motionGate =
+  "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion-ok')}catch(e){}";
 
 const meta: Record<string, { title: string; description: string }> = {
   en: {
@@ -103,13 +107,22 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className={`${fraunces.variable} ${jakarta.variable}`}>
+    <html
+      lang={locale}
+      className={`${fraunces.variable} ${jakarta.variable}`}
+      suppressHydrationWarning
+    >
       <body className='bg-cream font-sans text-charcoal antialiased'>
+        <script
+          // Runs before first paint: opt in to entrance motion unless reduced motion is asked for.
+          dangerouslySetInnerHTML={{ __html: motionGate }}
+        />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <SmoothScroll />
         <Analytics />
         <SpeedInsights />
       </body>

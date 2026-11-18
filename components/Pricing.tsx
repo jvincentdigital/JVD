@@ -7,11 +7,11 @@ export default function Pricing() {
   const t = useTranslations('pricing');
 
   return (
-    <section id='pricing' className='bg-cream px-4 py-20'>
+    <section id='pricing' className='bg-cream px-4 py-24 sm:py-32'>
       <div className='mx-auto max-w-6xl'>
         <ScrollReveal>
           <div className='mb-16 text-center'>
-            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl'>
+            <h2 className='font-serif text-3xl font-bold text-charcoal sm:text-4xl lg:text-[2.75rem]'>
               {t('heading')}
             </h2>
             <p className='mx-auto mt-4 max-w-2xl text-lg text-warm-gray'>{t('subheading')}</p>
@@ -24,9 +24,9 @@ export default function Pricing() {
 
             return (
               <ScrollReveal key={key}>
-                <div className='relative h-full rounded-xl border border-border bg-white p-10 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent'>
+                <div className='card-lift relative h-full rounded-xl border border-border bg-white p-8'>
                   {key === 'localPresence' && (
-                    <span className='absolute right-4 top-4 rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent'>
+                    <span className='absolute right-4 top-4 rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent-dark'>
                       {t(`bundles.${key}.badge`)}
                     </span>
                   )}
@@ -37,7 +37,7 @@ export default function Pricing() {
                     {t(`bundles.${key}.outcome`)}
                   </p>
                   <div className='mt-6 border-t border-border pt-6'>
-                    <p className='mb-4 text-xs font-medium uppercase tracking-wide text-accent'>
+                    <p className='mb-4 text-xs font-medium uppercase tracking-[0.08em] text-accent-dark'>
                       {t('coveredLabel')}
                     </p>
                     <ul className='space-y-3'>
@@ -72,7 +72,7 @@ export default function Pricing() {
             <p className='text-lg font-medium'>{t('ctaQuestion')}</p>
             <a
               href='#contact'
-              className='mt-4 inline-block rounded-lg bg-white px-8 py-3 font-medium text-accent-dark transition-colors hover:bg-cream focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-accent-dark'
+              className='mt-5 inline-flex min-h-12 items-center rounded-lg bg-white px-7 font-semibold text-accent-dark shadow-sm transition-[transform,background-color] duration-200 hover:-translate-y-px hover:bg-cream focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-accent-dark active:scale-[0.98]'
             >
               {t('ctaButton')}
             </a>

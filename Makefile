@@ -89,3 +89,11 @@ docs: ## Serve docs locally
 .PHONY: help
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: design-lint
+design-lint: ## Check components for text contrast, focus rings and "AI look" habits
+	node scripts/design/lint.mjs
+
+.PHONY: design-test
+design-test: ## Self-test the design lint
+	node scripts/design/selftest.mjs

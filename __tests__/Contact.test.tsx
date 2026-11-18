@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Contact from '../components/Contact';
+import Contact, { MIN_FILL_MS } from '../components/Contact';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
@@ -21,9 +21,19 @@ const fillField = async (label: RegExp | string, value: string) => {
   await userEvent.type(input, value);
 };
 
+// The form ignores submits sent faster than a person could type (spam guard).
+// Freeze the clock at mount, then jump past the minimum before the user acts.
+let now = 0;
+const renderContact = () => {
+  now = 0;
+  render(<Contact />);
+  now = MIN_FILL_MS;
+};
+
 describe('Contact form', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
+    vi.spyOn(Date, 'now').mockImplementation(() => now);
   });
 
   afterEach(() => {
@@ -32,7 +42,7 @@ describe('Contact form', () => {
   });
 
   it('shows validation errors for empty / short / invalid fields', async () => {
-    render(<Contact />);
+    renderContact();
     await userEvent.click(screen.getByRole('button', { name: /form\.submit/i }));
 
     expect(await screen.findByText('form.name.error')).toBeInTheDocument();
@@ -42,7 +52,7 @@ describe('Contact form', () => {
   });
 
   it('rejects malformed emails', async () => {
-    render(<Contact />);
+    renderContact();
     await fillField(/form\.name\.label/, 'Jane');
     await fillField(/form\.email\.label/, 'not-an-email');
     await fillField(/form\.message\.label/, 'A long enough message.');
@@ -54,7 +64,7 @@ describe('Contact form', () => {
 
   it('submits successfully and shows the success state', async () => {
     (fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: true });
-    render(<Contact />);
+    renderContact();
 
     await fillField(/form\.name\.label/, 'Jane Doe');
     await fillField(/form\.email\.label/, 'jane@example.com');
@@ -71,7 +81,7 @@ describe('Contact form', () => {
 
   it('shows error state when the server rejects', async () => {
     (fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: false });
-    render(<Contact />);
+    renderContact();
 
     await fillField(/form\.name\.label/, 'Jane Doe');
     await fillField(/form\.email\.label/, 'jane@example.com');
@@ -83,7 +93,7 @@ describe('Contact form', () => {
 
   it('shows error state on network failure', async () => {
     (fetch as unknown as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('offline'));
-    render(<Contact />);
+    renderContact();
 
     await fillField(/form\.name\.label/, 'Jane Doe');
     await fillField(/form\.email\.label/, 'jane@example.com');
@@ -93,9 +103,8 @@ describe('Contact form', () => {
     expect(await screen.findByText('form.generic_error')).toBeInTheDocument();
   });
 
-  it('forwards the honeypot value when set (so spam can be filtered server-side)', async () => {
-    (fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: true });
-    render(<Contact />);
+  it('does not send when the honeypot is filled, but shows success', async () => {
+    renderContact();
 
     const gotcha = document.getElementById('contact-gotcha') as HTMLInputElement;
     await userEvent.type(gotcha, 'spammy');
@@ -105,8 +114,20 @@ describe('Contact form', () => {
     await fillField(/form\.message\.label/, 'Hello, I would like a website.');
     await userEvent.click(screen.getByRole('button', { name: /form\.submit/i }));
 
-    await waitFor(() => expect(fetch).toHaveBeenCalled());
-    const body = JSON.parse((fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0][1].body);
-    expect(body._gotcha).toBe('spammy');
+    expect(await screen.findByText('successHeading')).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('does not send a submit that comes faster than a person could type', async () => {
+    renderContact();
+    now = MIN_FILL_MS - 1;
+
+    await fillField(/form\.name\.label/, 'Jane Doe');
+    await fillField(/form\.email\.label/, 'jane@example.com');
+    await fillField(/form\.message\.label/, 'Hello, I would like a website.');
+    await userEvent.click(screen.getByRole('button', { name: /form\.submit/i }));
+
+    expect(await screen.findByText('successHeading')).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
   });
 });
